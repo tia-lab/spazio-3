@@ -5,7 +5,7 @@
   "types": "./dist/index.d.ts",
   "author": "tia-lab",
   "scripts": {
-    "dev": "vite --port 2222",
+    "dev": "vite --port 3333",
     "build": "rimraf build/**/* && tsc && vite build",
     "test": "vitest",
     "test:coverage": "vitest --coverage",
