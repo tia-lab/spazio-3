@@ -1,0 +1,14 @@
+@import '@splidejs/splide/css';
+
+.splide {
+  visibility: visible;
+
+  ul {
+    list-style-type: none;
+    margin-left: 0;
+  }
+
+  li {
+    padding-left: 0;
+  }
+}

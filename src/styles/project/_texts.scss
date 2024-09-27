@@ -1,0 +1,179 @@
+@use 'sass:map';
+@use '../export.scss' as *;
+
+:root {
+  font-family: Overpass;
+
+  --font-mate: Overpass;
+}
+
+p {
+  margin: 0;
+}
+
+body,
+p {
+  font-size: 1.0625rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25rem; /* 117.647% */
+}
+
+.text-s {
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.25rem;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1rem; /* 133.333% */
+}
+
+.text-btn {
+  font-size: 1.0625rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 1.5rem; /* 141.176% */
+}
+
+.text-btn-s {
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 1.25rem; /* 142.857% */
+}
+
+.text-btn-xs {
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 1rem; /* 133.333% */
+}
+
+h1,
+.title-h1 {
+  font-size: 3.5rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 4rem; /* 114.286% */
+
+  @include mobile {
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 2.5rem; /* 125% */
+  }
+}
+
+h2,
+.title-h2 {
+  font-size: 3rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 3.5rem; /* 116.667% */
+
+  @include mobile {
+    font-size: 1.875rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 2.25rem; /* 120% */
+  }
+}
+
+h3,
+.title-h3 {
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 2.5rem;
+
+  @include mobile {
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.875rem; /* 125% */
+  }
+}
+
+h4,
+.title-h4 {
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.875rem;
+
+  @include mobile {
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.75rem; /* 140% */
+  }
+}
+
+h5,
+.title-h5 {
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.75rem; /* 140% */
+
+  @include mobile {
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.75rem; /* 155.556% */
+  }
+}
+
+b,
+strong {
+  font-weight: bold;
+}
+
+em {
+  font-style: italic;
+}
+
+ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+
+  li {
+    padding-left: 0.5rem;
+  }
+}
+
+blockquote {
+  border-left: 1px solid $neutral-300;
+  padding-left: 2rem;
+}
+
+.rich-text {
+  h1,
+  h2,
+  h3,
+  h4 {
+    margin-bottom: 0;
+  }
+
+  h5,
+  h6,
+  p,
+  blockquote {
+    margin-bottom: 0.75rem;
+  }
+
+  ul,
+  ol {
+    margin-bottom: 1rem;
+  }
+
+  blockquote {
+    padding-left: 1rem;
+    border-left: 2px solid;
+  }
+}

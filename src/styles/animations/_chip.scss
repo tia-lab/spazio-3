@@ -1,0 +1,26 @@
+@use '../export.scss' as *;
+
+@mixin chip_transition($duration, $ease) {
+  transition:
+    background-color $duration $ease,
+    color $duration $ease,
+    border-color $duration $ease;
+
+  .button_icon {
+    transition: all $duration $ease;
+  }
+}
+
+[data-anim-chip='default'] {
+  @include chip_transition($duration-default, $ease-out-cubic);
+
+  &:hover {
+    background-color: $neutral-100;
+    color: $neutral-400;
+    border-color: $neutral-400;
+
+    .button_icon {
+      transform: translateX(0.25rem);
+    }
+  }
+}

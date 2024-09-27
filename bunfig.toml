@@ -1,0 +1,5 @@
+[install]
+registry = "https://registry.npmjs.org" # Default registry (if you need to set it)
+
+[install.scopes]
+@gsap = { url = "https://npm.greensock.com", token = "d627221b-c819-4fc1-a49e-bc65d75343e5" }

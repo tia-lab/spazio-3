@@ -1,0 +1,12 @@
+@use '../export.scss' as *;
+
+@include wf-live {
+  [data-anim='title'],
+  [data-anim='fade-in'],
+  [data-anim='fade-in-up'],
+  [data-anim='fade-in-right'],
+  [data-anim='card-home'],
+  [data-carousel='inner'] .home_cariousel_item {
+    @include auto-alpha;
+  }
+}

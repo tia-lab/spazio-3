@@ -1,0 +1,8 @@
+@mixin auto-alpha() {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.auto-alpha {
+  @include auto-alpha;
+}

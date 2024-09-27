@@ -1,0 +1,55 @@
+@use '../vars.scss' as vars;
+@use '../mixin/mixin.scss' as mixin;
+
+.hidden,
+.hide {
+  display: none;
+}
+
+.hide-mobile {
+  @include mixin.mobile {
+    display: none !important;
+  }
+}
+
+.hide-desktop {
+  @include mixin.desktop {
+    display: none !important;
+  }
+}
+
+.hide-tablet {
+  @include mixin.tablet {
+    display: none !important;
+  }
+}
+
+.hide-from-mobile {
+  @include mixin.from-mobile {
+    display: none !important;
+  }
+}
+
+.hide-till-tablet {
+  @include mixin.till-tablet {
+    display: none !important;
+  }
+}
+
+.hide-from-tablet {
+  @include mixin.from-tablet {
+    display: none !important;
+  }
+}
+
+.hide-from-desktop {
+  @include mixin.from-desktop {
+    display: none !important;
+  }
+}
+
+.hide-till-desktop {
+  @include mixin.till-desktop {
+    display: none !important;
+  }
+}

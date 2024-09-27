@@ -1,0 +1,35 @@
+@mixin ratios-16-9 {
+  @media (aspect-ratio > 16/9) {
+    @content;
+  }
+}
+
+@mixin ratios-16-9-min {
+  @media (aspect-ratio >= 16/9) {
+    @content;
+  }
+}
+
+@mixin ratios-16-9-max {
+  @media (aspect-ratio <= 16/9) {
+    @content;
+  }
+}
+
+@mixin ratios-16-9-only {
+  @media (aspect-ratio = 16/9) {
+    @content;
+  }
+}
+
+@mixin ratio-min($width, $height) {
+  @media (aspect-ratio > (#{$width}/#{$height})) {
+    @content;
+  }
+}
+
+@mixin ratio-max($width, $height) {
+  @media (aspect-ratio < (#{$width}/#{$height})) {
+    @content;
+  }
+}

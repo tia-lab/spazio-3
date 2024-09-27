@@ -1,0 +1,64 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:math';
+@use '../vars.scss' as vars;
+
+@mixin fluid-responsive(
+  $font-from,
+  $font-to,
+  $vw-from,
+  $vw-to,
+  $scaling: false,
+  $last: false,
+  $dev: false
+) {
+  $from: calc($vw-from / 100);
+  $to: calc($vw-to / 100);
+  $coefficient: calc(($font-to - $font-from) / ($to - $from));
+  $base: calc(($font-from - $from * $coefficient) / vars.$base);
+
+  @if $scaling {
+    html {
+      font-size: calc($base * 1rem + $coefficient * 1vw);
+      @if $dev {
+        font-size: calc($base * 1rem + $coefficient * 1vw) !important;
+      }
+    }
+
+    @media (width <= #{$vw-to}px) {
+      html {
+        font-size: calc($base * 1rem + $coefficient * 1vw);
+        @if $dev {
+          font-size: calc($base * 1rem + $coefficient * 1vw) !important;
+        }
+      }
+    }
+  } @else {
+    @if $last {
+      html {
+        font-size: calc($font-to / 16 * 1rem);
+        @if $dev {
+          font-size: calc($font-to / 16 * 1rem) !important;
+        }
+      }
+
+      @media (width <= #{$vw-to}px) {
+        html {
+          font-size: calc($base * 1rem + $coefficient * 1vw);
+          @if $dev {
+            font-size: calc($base * 1rem + $coefficient * 1vw) !important;
+          }
+        }
+      }
+    } @else {
+      @media (width <= #{$vw-to}px) {
+        html {
+          font-size: calc($base * 1rem + $coefficient * 1vw);
+          @if $dev {
+            font-size: calc($base * 1rem + $coefficient * 1vw) !important;
+          }
+        }
+      }
+    }
+  }
+}
