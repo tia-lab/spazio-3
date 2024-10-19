@@ -85,7 +85,7 @@ function removeInvalidClasses(filePath, logBox) {
 
   // Write the updated content back to the file
   fs.writeFileSync(filePath, fileContent, 'utf8')
-  logBox(chalk.blue('Removed invalid classes containing parentheses.'))
+  logBox(chalk.blue(`Removed invalid classes from ${filePath}.`))
 }
 
 // Function to write utility SCSS files for each export in settings and create a global file
@@ -139,6 +139,9 @@ export async function writeUtilitiesForAllSettings(logBox) {
       const exportUtilityFilePath = path.join(exportFolderPath, utilityFileName)
       fs.writeFileSync(exportUtilityFilePath, scssUtilities, 'utf8')
       logBox(chalk.gray(`Created ${utilityFileName} in ${exportFolderPath}`))
+
+      // Remove invalid classes from the individual utility file
+      removeInvalidClasses(exportUtilityFilePath, logBox)
 
       // Append to the global utility content
       globalUtilityContent += `\n/* Utility classes for ${exportName} */\n${scssUtilities}`

@@ -89,7 +89,7 @@ const SPOT_CONFIG = {
   use: {
     lenis: true,
     cursor: true,
-    theme: true,
+    theme: false,
     scrollbar: true,
     transition: true,
     preload: true,
