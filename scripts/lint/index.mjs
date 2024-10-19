@@ -82,10 +82,11 @@ function runCommand(command, args, description, color, isLint = false) {
     // Run ESLint
     console.log(chalk.cyan('✨ Running ESLint...'))
     await runCommand(
-      ['lint', '--fix', '--ignore-path', './config/.eslintignore'],
-      'ESLint',
-      chalk.reset,
-      true // Specify that this is a lint command
+      'eslint',
+      ['--fix', '--ignore-path', './config/.eslintignore'], // Full eslint command
+      'ESLint', // Name of the task
+      chalk.reset, // Logging utility, assuming runCommand handles this correctly
+      true // Indicate that this is a lint command, if needed by runCommand
     )
 
     console.log(chalk.green('🎉 All linting processes completed successfully!'))
