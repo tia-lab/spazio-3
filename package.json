@@ -8,7 +8,7 @@
     "lint": "bun ./scripts/lint/index.mjs",
     "css": "tsx ./scripts/scss/index.mjs && bun ./scripts/scss/lint/index.mjs",
     "dev": "bun css && vite --port 3333",
-    "build": "rimraf build/**/* && tsc && vite build",
+    "build": "bun css && rimraf build/**/* && tsc && vite build",
     "test": "vitest",
     "test:coverage": "vitest --coverage",
     "prepare": "husky"
