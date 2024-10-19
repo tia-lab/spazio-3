@@ -1,5 +1,5 @@
 @use './breakpoints' as br;
-@use '../vars/vars' as vars;
+@use '../vars' as vars;
 
 @mixin font-primary {
   font-family: vars.$font-primary;
