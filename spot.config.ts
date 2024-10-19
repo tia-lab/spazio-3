@@ -56,13 +56,13 @@ const SPOT_CONFIG = {
     mobile: '(max-width: 640px)'
   },
   breakpoints: {
-    mobile: 640,
-    tablet: 1024
+    mobile: 767,
+    tablet: 991
   },
   animations: {
     vars: {
       lenis: {
-        options: { lerp: 0.1 } as LenisOptions,
+        options: { lerp: 0.025 } as LenisOptions,
         gsapSync: true
       },
       ease: {

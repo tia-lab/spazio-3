@@ -1,9 +1,9 @@
 import { ANIM_VAR } from '$/spot.config'
 import { gsap } from '@gsap'
 
-const name = "[data-anim='title']"
+const name = "[data-anim='text']"
 
-const anim_title = (_ctx: any) => {
+const anim_text = (_ctx: any) => {
   const els = document.querySelectorAll(name)
   if (els.length === 0) return
 
@@ -24,4 +24,4 @@ const anim_title = (_ctx: any) => {
   })
 }
 
-export default anim_title
+export default anim_text

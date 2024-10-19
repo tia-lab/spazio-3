@@ -14,16 +14,18 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "tsx": "^4.19.1",
     "@barba/core": "^2.9.7",
     "@splidejs/splide": "^4.1.4",
     "@studio-freight/lenis": "^1.0.42",
     "@types/alpinejs": "^3.13.10",
+    "@types/three": "^0.169.0",
     "alpinejs": "^3.13.10",
     "axios": "^1.6.8",
     "gsap": "npm:@gsap/business",
     "petite-vue": "^0.4.1",
-    "rollup-plugin-postcss": "^4.0.2"
+    "rollup-plugin-postcss": "^4.0.2",
+    "three": "^0.169.0",
+    "tsx": "^4.19.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.6.0",

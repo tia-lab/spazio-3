@@ -1,0 +1,35 @@
+@import '../../exports';
+
+.link_underline {
+  transition: color $duration-base $out-cubic;
+
+  .team_link_icon,
+  .link_underline_text {
+    transition: transform $duration-base $out-cubic;
+  }
+
+  .team_link_line {
+    right: 0;
+    left: auto;
+    transition:
+      width $duration-base $out-cubic,
+      background-color $duration-base $out-cubic;
+  }
+
+  &:hover {
+    color: $neutral-400;
+
+    .team_link_icon {
+      transform: rotate(45deg);
+    }
+
+    .link_underline_text {
+      transform: translateX(2rem);
+    }
+
+    .team_link_line {
+      width: 90%;
+      background-color: $neutral-300;
+    }
+  }
+}
