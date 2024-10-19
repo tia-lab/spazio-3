@@ -1,0 +1,42 @@
+@use '../vars/vars' as vars;
+
+@mixin padding-global {
+  padding-left: vars.$padding-global;
+  padding-right: vars.$padding-global;
+}
+
+@mixin fluid {
+  margin-left: calc(-1 * vars.$padding-global);
+  margin-right: calc(-1 * vars.$padding-global);
+}
+
+@mixin container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: vars.$container-gutter;
+}
+
+@mixin page-wrapper {
+  position: relative;
+}
+
+@mixin main-wrapper {
+  position: relative;
+  max-width: vars.$page-width;
+  margin-left: auto;
+  margin-right: auto;
+  @include padding-global;
+}
+
+@mixin section {
+  position: relative;
+}
+
+@mixin hide-scrollbar() {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

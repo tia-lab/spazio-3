@@ -1,23 +1,28 @@
 import { Theme } from '@/types'
 import { LenisOptions } from '@studio-freight/lenis'
-import media from './media'
 const goldenRatio = (1 + Math.sqrt(5)) / 2
+const localhost =
+  typeof import.meta !== 'undefined' && import.meta.env
+    ? import.meta.env.VITE_LOCALHOST_URL
+    : ''
+const host =
+  typeof import.meta !== 'undefined' && import.meta.env
+    ? import.meta.env.VITE_PROD_URL
+    : ''
 
 export const COLORS = {
   neutral100: '#FFF',
   neutral200: '#777C87',
   neutral300: '#3A3F49',
   neutral400: '#08090A',
-  red: '#E8210F',
+  red: '#E8210F'
 }
 
 const SPOT_CONFIG = {
   admin: {
     dev: true,
-    //@ts-ignore
-    localhost: import.meta.env.VITE_LOCALHOST_URL || '',
-    //@ts-ignore
-    host: import.meta.env.VITE_PROD_URL || '',
+    localhost: localhost || '',
+    host: host || ''
   },
 
   routes: {
@@ -25,7 +30,7 @@ const SPOT_CONFIG = {
     about: 'about',
     contact: 'contact',
     projects: 'projects',
-    project: 'projects/template',
+    project: 'projects/template'
   },
 
   theme: {
@@ -35,22 +40,30 @@ const SPOT_CONFIG = {
       neutral200: COLORS.neutral200,
       neutral300: COLORS.neutral300,
       neutral400: COLORS.neutral400,
-      red: COLORS.red,
+      red: COLORS.red
     },
     dark: {
       neutral100: COLORS.neutral400,
       neutral200: COLORS.neutral200,
       neutral300: COLORS.neutral300,
       neutral400: COLORS.neutral100,
-      red: COLORS.red,
-    },
+      red: COLORS.red
+    }
   },
-  media: media,
+  media: {
+    desktop: '(min-width: 1024px)',
+    tablet: '(max-width: 1023px)',
+    mobile: '(max-width: 640px)'
+  },
+  breakpoints: {
+    mobile: 640,
+    tablet: 1024
+  },
   animations: {
     vars: {
       lenis: {
         options: { lerp: 0.1 } as LenisOptions,
-        gsapSync: true,
+        gsapSync: true
       },
       ease: {
         out: 'power2.out',
@@ -64,14 +77,14 @@ const SPOT_CONFIG = {
         circOut: 'circ.out',
         circInOut: 'circ.inOut',
         rough:
-          'rough({ template: none.out, strength: 1, points: 20, taper: none, randomize: true, clamp: false})',
+          'rough({ template: none.out, strength: 1, points: 20, taper: none, randomize: true, clamp: false})'
       },
       duration: {
         default: 1 / goldenRatio,
         goldenRatio: goldenRatio,
-        stagger: 1 / goldenRatio / 5,
-      },
-    },
+        stagger: 1 / goldenRatio / 5
+      }
+    }
   },
   use: {
     lenis: true,
@@ -81,12 +94,12 @@ const SPOT_CONFIG = {
     transition: true,
     preload: true,
     i18n: true,
-    pageLines: true,
+    pageLines: true
   },
   debug: {
     barba: false,
-    lenis: false,
-  },
+    lenis: false
+  }
 }
 
 const ANIM_VAR = SPOT_CONFIG.animations.vars

@@ -1,0 +1,111 @@
+/* Utility classes for colors */
+
+.background-color-white {
+  background-color: var(--white);
+}
+
+.text-white {
+  color: var(--white);
+}
+
+.background-color-black {
+  background-color: var(--black);
+}
+
+.text-black {
+  color: var(--black);
+}
+
+.background-color-neutral-100 {
+  background-color: var(--neutral-100);
+}
+
+.text-neutral-100 {
+  color: var(--neutral-100);
+}
+
+.background-color-neutral-200 {
+  background-color: var(--neutral-200);
+}
+
+.text-neutral-200 {
+  color: var(--neutral-200);
+}
+
+.background-color-neutral-300 {
+  background-color: var(--neutral-300);
+}
+
+.text-neutral-300 {
+  color: var(--neutral-300);
+}
+
+.background-color-neutral-400 {
+  background-color: var(--neutral-400);
+}
+
+.text-neutral-400 {
+  color: var(--neutral-400);
+}
+
+.background-color-neutral-500 {
+  background-color: var(--neutral-500);
+}
+
+.text-neutral-500 {
+  color: var(--neutral-500);
+}
+
+.background-color-neutral-600 {
+  background-color: var(--neutral-600);
+}
+
+.text-neutral-600 {
+  color: var(--neutral-600);
+}
+
+/* Utility classes for spacings */
+
+.mb-space-none {
+  margin-bottom: var(--space-none);
+}
+
+.mb-space-2xs {
+  margin-bottom: var(--space-2xs);
+}
+
+.mb-space-xs {
+  margin-bottom: var(--space-xs);
+}
+
+.mb-space-sm {
+  margin-bottom: var(--space-sm);
+}
+
+.mb-space-md {
+  margin-bottom: var(--space-md);
+}
+
+.mb-space-lg {
+  margin-bottom: var(--space-lg);
+}
+
+.mb-space-xl {
+  margin-bottom: var(--space-xl);
+}
+
+.mb-space-2xl-default {
+  margin-bottom: var(--space-2xl-default);
+}
+
+.mb-space-3xl-default {
+  margin-bottom: var(--space-3xl-default);
+}
+
+.mb-space-4xl-default {
+  margin-bottom: var(--space-4xl-default);
+}
+
+.mb-space-5xl-default {
+  margin-bottom: var(--space-5xl-default);
+}

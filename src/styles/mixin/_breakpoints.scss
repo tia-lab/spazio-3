@@ -1,110 +1,35 @@
-@use '../vars.scss' as *;
+@use '../vars/vars' as *;
 @use 'sass:map';
 
+$tablet: 1024px;
+$mobile: 640px;
+
 @mixin mobile {
-  @media (max-width: #{$mobile-breakpoint - 1px}) {
+  @media (max-width: #{$mobile - 1px}) {
     @content;
   }
 }
 
 @mixin tablet {
-  @media (max-width: #{$tablet-breakpoint - 1px}) {
+  @media (max-width: #{$tablet - 1px}) {
     @content;
   }
 }
 
 @mixin tablet-only {
-  @media (min-width: #{$mobile-breakpoint}) and (max-width: #{$tablet-breakpoint - 1px}) {
-    @content;
-  }
-}
-
-@mixin desktop {
-  @media (min-width: #{$tablet-breakpoint}) {
-    @content;
-  }
-}
-
-@mixin from-mobile {
-  @media (min-width: #{$mobile-breakpoint}) {
+  @media (min-width: #{$mobile}) and (max-width: #{$tablet - 1px}) {
     @content;
   }
 }
 
 @mixin till-tablet {
-  @media (max-width: #{$tablet-breakpoint - 1px}) {
+  @media (max-width: #{$tablet - 1px}) {
     @content;
   }
 }
 
-@mixin from-tablet {
-  @media (min-width: #{$mobile-breakpoint}) {
+@mixin desktop {
+  @media (min-width: #{$tablet}) {
     @content;
-  }
-}
-
-@mixin from-desktop {
-  @media (min-width: #{$tablet-breakpoint}) {
-    @content;
-  }
-}
-
-@mixin till-desktop {
-  @media (max-width: #{$tablet-breakpoint - 1px}) {
-    @content;
-  }
-}
-
-@mixin is-page-width-min {
-  @media (min-width: #{map.get($page, max-width)}) {
-    @content;
-  }
-}
-
-@mixin is-page-width-max {
-  @media (max-width: #{map.get($page, max-width)}) {
-    @content;
-  }
-}
-
-@mixin hide-mobile {
-  @media (max-width: #{$mobile-breakpoint - 1px}) {
-    display: none;
-  }
-}
-
-@mixin hide-tablet {
-  @media (min-width: #{$mobile-breakpoint}) and (max-width: #{$tablet-breakpoint - 1px}) {
-    display: none;
-  }
-}
-
-@mixin hide-from-tablet {
-  @media (min-width: #{$tablet-breakpoint}) {
-    display: none;
-  }
-}
-
-@mixin hide-from-desktop {
-  @media (min-width: #{$mobile-breakpoint}) {
-    display: none;
-  }
-}
-
-@mixin hide-till-tablet {
-  @media (max-width: #{$tablet-breakpoint - 1px}) {
-    display: none;
-  }
-}
-
-@mixin hide-till-desktop {
-  @media (max-width: #{$tablet-breakpoint - 1px}) {
-    display: none;
-  }
-}
-
-@mixin hide-desktop {
-  @media (min-width: #{$mobile-breakpoint}) {
-    display: none;
   }
 }

@@ -1,5 +1,5 @@
 @use './breakpoints' as br;
-@use '../vars' as vars;
+@use '../vars/vars' as vars;
 
 @mixin font-primary {
   font-family: vars.$font-primary;
@@ -11,70 +11,50 @@
 
 @mixin title-display {
   @include font-secondary;
-  font-size: 8rem;
+  font-size: vars.$heading-display;
   font-style: normal;
   font-weight: 400;
   line-height: 90%;
-
-  @include br.mobile {
-    font-size: 3rem;
-  }
 }
 
 @mixin h1 {
   @include font-secondary;
-  font-size: 4rem;
+  font-size: vars.$heading-1;
   font-style: normal;
   font-weight: 400;
-  line-height: 100%;
-  @include br.mobile {
-    font-size: 3rem;
-  }
+  line-height: 100%; /* 4rem */
 }
 
 @mixin h2 {
   @include font-secondary;
-  font-size: 3rem;
-  line-height: 1.2;
-  font-weight: 700;
-
-  @include br.mobile {
-    font-size: 2.5rem;
-  }
+  font-size: vars.$heading-2;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%;
 }
 
 @mixin h3 {
   @include font-secondary;
-  font-size: 2.25rem;
+  font-size: vars.$heading-3;
   font-style: normal;
   font-weight: 400;
   line-height: 120%; /* 2.7rem */
-
-  @include br.mobile {
-    font-size: 2rem;
-  }
 }
 
 @mixin h4 {
   @include font-secondary;
-  font-size: 1.5rem;
+  font-size: vars.$heading-4;
   font-style: normal;
   font-weight: 400;
-  line-height: 120%;
-  @include br.mobile {
-    font-size: 1.5rem;
-  }
+  line-height: 120%; /* 1.8rem */
 }
 
 @mixin h5 {
   @include font-secondary;
+  font-size: vars.$heading-5;
   font-style: normal;
   font-weight: 400;
   line-height: 120%; /* 1.65rem */
-
-  @include br.mobile {
-    font-size: 1.25rem;
-  }
 }
 
 @mixin text-large {
@@ -82,12 +62,12 @@
   font-size: vars.$text-large;
   font-style: normal;
   font-weight: 400;
-  line-height: normal;
+  line-height: 135%; /* 2.025rem */
 }
 
-@mixin text-base {
+@mixin text-main {
   @include font-primary;
-  font-size: vars.$text-base;
+  font-size: vars.$text-main;
   font-style: normal;
   font-weight: 400;
   line-height: 150%; /* 1.5rem */
@@ -98,15 +78,15 @@
   font-size: vars.$text-small;
   font-style: normal;
   font-weight: 400;
-  line-height: 150%;
+  line-height: 150%; /* 1.3125rem */
 }
 
 @mixin text-btn {
   @include font-primary;
-  font-size: vars.$text-base;
+  font-size: vars.$text-main;
   font-style: normal;
   font-weight: 400;
-  line-height: 150%;
+  line-height: 150%; /* 1.5rem */
 }
 
 @mixin text-btn-small {
@@ -114,5 +94,5 @@
   font-size: vars.$text-small;
   font-style: normal;
   font-weight: 400;
-  line-height: 150%;
+  line-height: 150%; /* 1.3125rem */
 }

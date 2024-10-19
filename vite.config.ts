@@ -13,7 +13,7 @@ const outDir = resolve(__dirname, 'dist')
 module.exports = defineConfig({
   // Define environment variable
   define: {
-    __APP_ENV__: process.env.VITE_VERCEL_ENV,
+    __APP_ENV__: process.env.VITE_VERCEL_ENV
   },
   root: './src',
   base: './',
@@ -30,16 +30,16 @@ module.exports = defineConfig({
         typescript(), // Use TypeScript plugin for Rollup
         visualizer({ filename: './dist/analyze.html' }) as PluginOption, // Generate bundle analysis report
         chunkSplitPlugin(), // Split chunks for better caching
-        compression(), // Apply compression to generated assets
+        compression() // Apply compression to generated assets
       ],
       input: {
         init: path.resolve(root, '/init.ts'), // Entry point for 'init' module
-        main: path.resolve(root, '/main.ts'), // Entry point for 'main' module
+        main: path.resolve(root, '/main.ts') // Entry point for 'main' module
       },
       output: {
         noConflict: true,
-        entryFileNames: `[name].js`, // Output file name for entry points
-        chunkFileNames: `[name].js`, // Output file name for chunks
+        entryFileNames: '[name].js', // Output file name for entry points
+        chunkFileNames: '[name].js', // Output file name for chunks
         assetFileNames: ({ name }) => {
           if (/\.(gif|jpe?g|png|svg)$/.test(name ?? '')) {
             return 'images/[name][extname]' // Output file name for images
@@ -50,19 +50,23 @@ module.exports = defineConfig({
           }
 
           return '[name].[extname]' // Output file name for other assets
-        },
-      },
-    },
+        }
+      }
+    }
   },
   resolve: {
     alias: [
-      { find: '@', replacement: path.resolve(__dirname, 'src') }, // Alias for the 'src' directory
-      { find: '$', replacement: path.resolve(__dirname) }, // Alias for the root directory
+      { find: '@', replacement: path.resolve(__dirname, 'src') },
+      { find: '$', replacement: path.resolve(__dirname) },
       {
         find: '@gsap',
-        replacement: path.resolve(__dirname, 'src/animations/gsap'), // Alias for the 'gsap' directory
+        replacement: path.resolve(__dirname, 'src/animations/gsap')
       },
-    ],
+      {
+        find: '@config',
+        replacement: path.resolve(__dirname, 'src/spot.config.ts')
+      } // Add this line
+    ]
   },
 
   server: {
@@ -71,7 +75,7 @@ module.exports = defineConfig({
     cors: true,
     hmr: {
       host: 'localhost',
-      protocol: 'ws',
-    },
-  },
+      protocol: 'ws'
+    }
+  }
 })

@@ -1,5 +1,0 @@
-@mixin wf-live {
-  html:not(.wf-design-mode, .w-editor) {
-    @content;
-  }
-}

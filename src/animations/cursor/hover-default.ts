@@ -8,7 +8,7 @@ const anim_cursor_hover_default = (ref: any) => {
     scale: 2,
     pointerEvents: 'none',
     duration: ANIM_VAR.duration.default,
-    ease: ANIM_VAR.ease.out,
+    ease: ANIM_VAR.ease.out
   })
 
   return tl

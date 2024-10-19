@@ -1,0 +1,20 @@
+:root {
+  --base: 16;
+  --container-gutter: 1.5rem;
+  --page-width: 2200px;
+  --padding-global: 1.5rem;
+  --padding-vertical-none: 0;
+  --padding-vertical-small: 2rem;
+  --padding-vertical-main: 4rem;
+  --padding-vertical-large: 8rem;
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --container-gutter: 1rem;
+    --padding-global: 1rem;
+    --padding-vertical-small: 1.5rem;
+    --padding-vertical-main: 4rem;
+    --padding-vertical-large: 8rem;
+  }
+}

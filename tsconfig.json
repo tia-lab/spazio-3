@@ -2,6 +2,7 @@
   "compilerOptions": {
     "rootDir": ".",
     "paths": {
+      "@config": ["./spot.config.ts"],
       "@gsap": ["./src/animations/gsap"],
       "@/*": ["./src/*"],
       "$/*": ["./*"]

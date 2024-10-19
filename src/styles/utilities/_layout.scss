@@ -1,0 +1,56 @@
+@use '../exports.scss' as *;
+$display: grid, flex, block, inline, inline-block;
+$poistion: relative, absolute, fixed, sticky, static;
+$cursor: pointer, default, text, wait, help, pointer, progress, not-allowed,
+  move, crosshair, alias, copy, no-drop, col-resize, row-resize, n-resize,
+  e-resize, s-resize, w-resize, ne-resize, nw-resize, se-resize, sw-resize,
+  ew-resize, ns-resize, nesw-resize, nwse-resize, zoom-in, zoom-out, grab,
+  grabbing;
+
+.container {
+  @include container;
+}
+
+.section {
+  @include section;
+}
+
+.fluid {
+  @include fluid;
+}
+
+.page-wrapper {
+  @include page-wrapper;
+}
+
+.main-wrapper {
+  @include main-wrapper;
+}
+
+.padding-global {
+  @include padding-global;
+}
+
+@each $d in $display {
+  .#{$d} {
+    display: $d;
+  }
+}
+
+@each $p in $poistion {
+  .#{$p} {
+    position: $p;
+  }
+}
+
+@each $c in $cursor {
+  .cursor-#{$c} {
+    cursor: $c;
+  }
+}
+
+@for $i from 1 through 12 {
+  .col-span-#{$i} {
+    grid-column: span $i;
+  }
+}

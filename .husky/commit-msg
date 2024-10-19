@@ -1,7 +1,8 @@
 #!/usr/bin/env sh
+#!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npx --no -- commitlint --edit "$1"
+npx --no -- commitlint --config config/commitlint.config.js --edit "$1"
 commit_number=$(git rev-list --all --count)
 new_message="[$commit_number] $(cat "$1")"
 

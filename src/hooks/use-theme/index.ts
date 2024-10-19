@@ -23,7 +23,7 @@ const useTheme = () => {
     '--neutral-100': THEME[theme].neutral100,
     '--neutral-200': THEME[theme].neutral200,
     '--neutral-300': THEME[theme].neutral300,
-    '--neutral-400': THEME[theme].neutral400,
+    '--neutral-400': THEME[theme].neutral400
   })
 
   const switchTheme = () => {
@@ -34,18 +34,18 @@ const useTheme = () => {
 
     gsap.to(iconDark, {
       display: 'block',
-      autoAlpha: newTheme === 'dark' ? 1 : 0,
+      autoAlpha: newTheme === 'dark' ? 1 : 0
     })
     gsap.to(iconLight, {
       display: 'block',
-      autoAlpha: newTheme === 'light' ? 1 : 0,
+      autoAlpha: newTheme === 'light' ? 1 : 0
     })
 
     gsap.to(':root', {
       '--neutral-100': THEME[newTheme].neutral100,
       '--neutral-200': THEME[newTheme].neutral200,
       '--neutral-300': THEME[newTheme].neutral300,
-      '--neutral-400': THEME[newTheme].neutral400,
+      '--neutral-400': THEME[newTheme].neutral400
     })
 
     document.documentElement.setAttribute('data-theme', newTheme)

@@ -1,0 +1,29 @@
+@use '../../../vars/vars' as vars;
+
+@mixin anim-fade-in-hover(
+  $from: 0,
+  $to: 1,
+  $duration: vars.$duration-base,
+  $timing-function: vars.$out-cubic
+) {
+  opacity: #{$from};
+  transition: opacity #{$duration} #{$timing-function};
+
+  &:hover {
+    opacity: #{$to};
+  }
+}
+
+@mixin anim-fade-in-scroll(
+  $from: 0,
+  $to: 1,
+  $duration: vars.$duration-base,
+  $timing-function: vars.$out-cubic
+) {
+  opacity: #{$from};
+  transition: opacity #{$duration} #{$timing-function};
+
+  &._animate {
+    opacity: #{$to};
+  }
+}

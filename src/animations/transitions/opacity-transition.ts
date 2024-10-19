@@ -9,14 +9,14 @@ const opacityTransition: ITransitionPage = {
   from: {
     custom: ({ trigger }: { trigger: any }) => {
       return trigger.dataset.transition === 'opacity'
-    },
+    }
   },
   leave(data): any {
     return gsap.to(data.current.container, {
       opacity: 0,
       y: '2rem',
       duration: ANIM_VAR.duration.default,
-      ease: ANIM_VAR.ease.out,
+      ease: ANIM_VAR.ease.out
     })
   },
   enter(data): any {
@@ -26,9 +26,9 @@ const opacityTransition: ITransitionPage = {
       ease: ANIM_VAR.ease.out,
       onComplete: () => {
         animations()
-      },
+      }
     })
-  },
+  }
 }
 
 export default opacityTransition

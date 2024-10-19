@@ -1,9 +1,8 @@
-@use 'sass:map';
-@use '../export.scss' as *;
+@import '../mixin/mixin';
 
 body,
 p {
-  @include text-base;
+  @include text-main;
 }
 
 .title-display {
@@ -47,59 +46,10 @@ h5,
   @include text-small;
 }
 
-.text-base {
-  @include text-base;
+.text-main {
+  @include text-main;
 }
 
 .text-large {
   @include text-large;
-}
-
-b,
-strong {
-  font-weight: bold;
-}
-
-em {
-  font-style: italic;
-}
-
-ul {
-  list-style-type: disc;
-  margin-left: 1.5rem;
-
-  li {
-    padding-left: 0.5rem;
-  }
-}
-
-blockquote {
-  border-left: 1px solid $neutral-300;
-  padding-left: 2rem;
-}
-
-.rich-text {
-  h1,
-  h2,
-  h3,
-  h4 {
-    margin-bottom: 0;
-  }
-
-  h5,
-  h6,
-  p,
-  blockquote {
-    margin-bottom: 0.75rem;
-  }
-
-  ul,
-  ol {
-    margin-bottom: 1rem;
-  }
-
-  blockquote {
-    padding-left: 1rem;
-    border-left: 2px solid;
-  }
 }

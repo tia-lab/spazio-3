@@ -25,9 +25,9 @@ const slide_default = () => {
           perPage: 3,
           padding: { left: '0rem', right: '1rem' },
           arrows: false,
-          gap: '1.875rem',
-        },
-      },
+          gap: '1.875rem'
+        }
+      }
     })
     splide.on('ready', function () {
       splide?.Components?.Arrows?.arrows?.prev?.classList.add('disabled')

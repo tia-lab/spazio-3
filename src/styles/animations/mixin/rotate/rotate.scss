@@ -1,0 +1,27 @@
+@use '../../../vars/vars' as vars;
+
+@mixin anim-rotate-hover(
+  $deg: 90deg,
+  $duration: vars.$duration-base,
+  $timing-function: vars.$out-cubic
+) {
+  transform: rotate(0deg); // Initial state
+  transition: transform #{$duration} #{$timing-function}; // Set transition properties
+
+  &:hover {
+    transform: rotate(#{$deg}); // Rotate to the specified degree on hover
+  }
+}
+
+@mixin anim-rotate-scroll(
+  $deg: 90deg,
+  $duration: vars.$duration-base,
+  $timing-function: vars.$out-cubic
+) {
+  transform: rotate(0deg); // Initial state
+  transition: transform #{$duration} #{$timing-function}; // Set transition properties
+
+  &._animate {
+    transform: rotate(#{$deg});
+  }
+}

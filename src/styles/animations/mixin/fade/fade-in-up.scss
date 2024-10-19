@@ -1,0 +1,39 @@
+@use '../../../vars/vars' as vars;
+
+@mixin anim-fade-in-up-hover(
+  $from: 0,
+  $to: 1,
+  $position: 2rem,
+  $duration: vars.$duration-base,
+  $timing-function: vars.$out-cubic
+) {
+  opacity: #{$from};
+  transform: translateY(#{$position});
+  transition:
+    opacity #{$duration} #{$timing-function},
+    transform #{$duration} #{$timing-function};
+
+  &:hover {
+    transform: translateY(0);
+    opacity: #{$to};
+  }
+}
+
+@mixin anim-fade-in-up-scroll(
+  $from: 0,
+  $to: 1,
+  $position: 2rem,
+  $duration: vars.$duration-base,
+  $timing-function: vars.$out-cubic
+) {
+  opacity: #{$from};
+  transform: translateY(#{$position});
+  transition:
+    opacity #{$duration} #{$timing-function},
+    transform #{$duration} #{$timing-function};
+
+  &._animate {
+    opacity: #{$to};
+    transform: translateY(0);
+  }
+}

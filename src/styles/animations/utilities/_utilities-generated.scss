@@ -1,0 +1,25 @@
+@import '../mixin/mixin';
+
+.anim-rotate-hover {
+  @include anim-rotate-hover;
+}
+
+.anim-rotate-scroll {
+  @include anim-rotate-scroll;
+}
+
+.anim-fade-in-up-hover {
+  @include anim-fade-in-up-hover;
+}
+
+.anim-fade-in-up-scroll {
+  @include anim-fade-in-up-scroll;
+}
+
+.anim-fade-in-hover {
+  @include anim-fade-in-hover;
+}
+
+.anim-fade-in-scroll {
+  @include anim-fade-in-scroll;
+}

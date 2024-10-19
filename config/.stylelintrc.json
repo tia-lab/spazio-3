@@ -1,0 +1,65 @@
+{
+  "ignoreFiles": ["**/*", "!**/*.scss", "!**/*.css", "/dist/**/*"],
+  "extends": [
+    "stylelint-config-standard-scss",
+    "stylelint-prettier/recommended",
+    "stylelint-config-prettier-scss"
+  ],
+  "rules": {
+    "no-empty-source": null,
+    "number-max-precision": null,
+    "prettier/prettier": [
+      true,
+      { "singleQuote": true, "trailingComma": "none" }
+    ],
+    "color-hex-length": null,
+    "scss/dollar-variable-empty-line-before": null,
+    "custom-property-empty-line-before": null,
+    "scss/dollar-variable-pattern": null,
+    "media-feature-range-notation": null,
+    "keyframes-name-pattern": null,
+    "custom-property-pattern": null,
+    "scss/at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": [
+          "tailwind",
+          "layer",
+          "apply",
+          "variants",
+          "responsive",
+          "screen",
+          "include",
+          "for",
+          "mixin",
+          "if",
+          "else",
+          "warn",
+          "return",
+          "function",
+          "use",
+          "each"
+        ]
+      }
+    ],
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["global"]
+      }
+    ],
+    "property-no-unknown": [
+      true,
+      {
+        "ignoreProperties": ["font-named-instance"]
+      }
+    ],
+    "selector-class-pattern": null,
+    "no-descending-specificity": null,
+    "scss/double-slash-comment-whitespace-inside": null,
+    "scss/at-mixin-pattern": null,
+    "media-feature-name-no-unknown": null,
+    "declaration-empty-line-before": null
+  },
+  "plugins": ["stylelint-prettier"]
+}

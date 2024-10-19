@@ -1,8 +1,13 @@
-/* Utils */
-@use './utility/index.scss' as utility;
+/* Reset */
+@import './utilities/reset';
+
+/* Variables */
+@import './vars/root';
+
+/* Utilities */
+@import './vars/utilities';
+@import './animations/utilities/utilities';
+@import './utilities/utilities';
 
 /* Project */
-@use './project/index.scss' as theme;
-
-// Animations
-@use './animations/index.scss' as animations;
+@import './project/project';

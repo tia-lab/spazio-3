@@ -55,7 +55,7 @@ const router = () => {
         async beforeEnter() {
           const { page } = await import('./pages/home/home')
           page()
-        },
+        }
       },
       {
         namespace: ROUTES.about,
@@ -63,10 +63,10 @@ const router = () => {
         async beforeEnter() {
           const { page } = await import('./pages/about/about')
           page()
-        },
-      },
+        }
+      }
     ],
-    transitions: [opacityTransition],
+    transitions: [opacityTransition]
   })
 }
 

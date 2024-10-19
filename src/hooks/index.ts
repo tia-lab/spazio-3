@@ -10,5 +10,5 @@ export {
   useGsapMatchMedia,
   useLenis,
   useScrollbar,
-  useTheme,
+  useTheme
 }

@@ -12,7 +12,7 @@ const animations = () => {
       anim_title(c)
       anim_test(c)
     },
-    scope: document.body,
+    scope: document.body
   })
 }
 

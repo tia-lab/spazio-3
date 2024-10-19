@@ -1,0 +1,5 @@
+@use '../exports.scss' as *;
+
+.auto-alpha {
+  @include auto-alpha;
+}

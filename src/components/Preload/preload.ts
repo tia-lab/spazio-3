@@ -25,13 +25,13 @@ export const preload = () => {
       const tl = gsap.timeline({
         onComplete: () => {
           sessionStorage.setItem('preload', 'true')
-        },
+        }
       })
       tl.to(progress, { width: '100%', duration: 2, ease: 'power1.inOut' })
         .to(preload, { autoAlpha: 0, duration: 1, ease: 'power1.inOut' })
         .to(preload, { display: 'none', onComplete: () => preload.remove() })
     },
-    scope: preload,
+    scope: preload
   })
   console.log(preload)
 }

@@ -18,7 +18,7 @@ const useCursor = () => {
 
         const defaults: GSAPTweenVars = {
           duration: ANIM_VAR.duration.default,
-          ease: ANIM_VAR.ease.out,
+          ease: ANIM_VAR.ease.out
         }
         const xTo = gsap.quickTo(cursor, 'x', defaults)
         const yTo = gsap.quickTo(cursor, 'y', defaults)
@@ -27,9 +27,9 @@ const useCursor = () => {
           onMove: ({ x, y }) => {
             xTo(x as number)
             yTo(y as number)
-          },
+          }
         })
-      },
+      }
     })
   }
 
@@ -50,10 +50,10 @@ const useCursor = () => {
             },
             onHoverEnd: () => {
               tl.reverse()
-            },
+            }
           })
         })
-      },
+      }
     })
   }
   return { cursorMove, cursorHover }

@@ -18,17 +18,17 @@ const useScrollbar = () => {
       const scroller = scrollbar.querySelector('[data-scrollbar-scroller]')
       const defaults: GSAPTweenVars = {
         duration: ANIM_VAR.duration.default,
-        ease: ANIM_VAR.ease.out,
+        ease: ANIM_VAR.ease.out
       }
       if (lenis) {
         lenis.on('scroll', () => {
           gsap.to(scroller, {
             left: `${lenis.progress * 100}%`,
-            ...defaults,
+            ...defaults
           })
         })
       }
-    },
+    }
   })
 }
 
