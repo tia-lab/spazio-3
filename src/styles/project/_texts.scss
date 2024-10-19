@@ -3,7 +3,7 @@
 
 body,
 p {
-  @include text-main;
+  @include text-base;
 }
 
 .title-display {
@@ -47,8 +47,8 @@ h5,
   @include text-small;
 }
 
-.text-main {
-  @include text-main;
+.text-base {
+  @include text-base;
 }
 
 .text-large {
