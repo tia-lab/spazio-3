@@ -2,45 +2,41 @@
 @use 'sass:map';
 
 $base: 16;
-$use-theme: true;
+$use-theme: false;
 $theme-default: 'light'; //use only if $use-theme is false
 $theme: (
   light: (
-    neutral-100: '#FFF',
-    neutral-200: '#777C87',
-    neutral-300: '#3A3F49',
-    neutral-400: '#08090A',
-    'red': '#E8210F',
-  ),
-  dark: (
-    neutral-100: '#08090A',
-    neutral-200: '#777C87',
-    neutral-300: '#3A3F49',
-    neutral-400: '#fff',
-    'red': '#E8210F',
+    neutral-100: '#fff',
+    neutral-200: '#edecf6',
+    neutral-300: '#cbc9da',
+    neutral-400: '#676573',
+    neutral-500: '#26252c',
+    neutral-600: '#17171a',
+    black: '#000',
+    white: '#fff',
   ),
 );
 $neutral-100: var(--neutral-100);
 $neutral-200: var(--neutral-200);
 $neutral-300: var(--neutral-300);
 $neutral-400: var(--neutral-400);
-$red: var(--red);
 
 //Fonts
-$font-overpass: var(--font-overpass);
+$font-primary: var(--font-primary);
+$font-secondary: var(--font-secondary);
 
-//Borders
-$border: 0.125rem;
-$border-m: 0.25rem;
+//Texts
+$text-base: 1rem;
+$text-small: 0.875rem;
+$text-large: 1.5rem;
 
 //Borders-radius
-$radius-sm: 0.125rem;
-$radius-md: 0.25rem;
-$radius: 0.5rem;
-$radius-xl: 0.75rem;
-$radius-2xl: 1rem;
-$radius-3xl: 1.5rem;
+$radius-none: 0;
+$radius-small: 0.5rem;
+$radius-medium: 1rem;
+$radius-large: 1.5rem;
 $radius-full: 624.9375rem;
+$radius-round: 100%;
 
 //strokes$
 $neutral-300-line: 0.25rem;
@@ -63,8 +59,8 @@ $container: (
     mobile: 12,
   ),
   gap: (
-    desktop: 1rem,
-    mobile: 0.5rem,
+    desktop: 1.5rem,
+    mobile: 1rem,
   ),
 );
 
@@ -98,37 +94,53 @@ $use-padding: (
 );
 $spacings: (
   padding-global: (
-    desktop: 3rem,
-    tablet: 2rem,
+    desktop: 1.5rem,
+    tablet: 1.5rem,
     mobile: 1rem,
   ),
-  0: (
-    desktop: 0.5rem,
-    mobile: 0.375rem,
+  none: (
+    desktop: 0,
+    mobile: 0,
+  ),
+  2xs: (
+    desktop: 0.25rem,
+    mobile: 0.125rem,
   ),
   xs: (
-    desktop: 1rem,
-    mobile: 0.75rem,
+    desktop: 0.25rem,
+    mobile: 0.25rem,
   ),
-  s: (
-    desktop: 2rem,
+  sm: (
+    desktop: 0.5rem,
+    mobile: 0.5rem,
+  ),
+  md: (
+    desktop: 1rem,
+    mobile: 1rem,
+  ),
+  l: (
+    desktop: 1.5rem,
     mobile: 1.5rem,
   ),
-  m: (
+  xl: (
+    desktop: 2rem,
+    mobile: 2rem,
+  ),
+  2xl: (
+    desktop: 3rem,
+    mobile: 2.5rem,
+  ),
+  3xl: (
     desktop: 4rem,
     mobile: 3rem,
   ),
-  l: (
-    desktop: 5rem,
-    mobile: 3.75rem,
+  4xl: (
+    desktop: 6rem,
+    mobile: 4.5rem,
   ),
-  xl: (
+  5xl: (
     desktop: 8rem,
     mobile: 6rem,
-  ),
-  xxl: (
-    desktop: 13rem,
-    mobile: 7.5rem,
   ),
 );
 

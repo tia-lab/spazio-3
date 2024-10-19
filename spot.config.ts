@@ -1,6 +1,6 @@
 import { Theme } from '@/types'
 import { LenisOptions } from '@studio-freight/lenis'
-
+import media from './media'
 const goldenRatio = (1 + Math.sqrt(5)) / 2
 
 export const COLORS = {
@@ -15,9 +15,9 @@ const SPOT_CONFIG = {
   admin: {
     dev: true,
     //@ts-ignore
-    localhost: import.meta.env.VITE_LOCALHOST_URL,
+    localhost: import.meta.env.VITE_LOCALHOST_URL || '',
     //@ts-ignore
-    host: import.meta.env.VITE_PROD_URL,
+    host: import.meta.env.VITE_PROD_URL || '',
   },
 
   routes: {
@@ -45,11 +45,7 @@ const SPOT_CONFIG = {
       red: COLORS.red,
     },
   },
-  media: {
-    desktop: `(min-width: 1024px)`,
-    tablet: `(max-width: 1023px)`,
-    mobile: `(max-width: 640px)`,
-  },
+  media: media,
   animations: {
     vars: {
       lenis: {
