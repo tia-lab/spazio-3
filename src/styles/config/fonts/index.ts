@@ -1,8 +1,8 @@
 import SCSSVars from '../types'
 
 export const fontVars = {
-  fontPrimary: 'var(--font-primary)',
-  fontSecondary: 'var(--font-secondary)'
+  fontPrimary: 'var(--font-inter)',
+  fontSecondary: 'var(--font-inter)'
 }
 
 export const fonts: SCSSVars = [fontVars, []]
