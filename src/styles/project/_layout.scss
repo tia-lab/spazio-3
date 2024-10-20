@@ -9,13 +9,15 @@ body {
   background-color: $neutral-100;
 
   &[data-section-top-color='dark'] {
-    .menu_open {
+    .menu_open,
+    .logo_block {
       color: $neutral-100;
     }
   }
 
   &[data-section-top-color='light'] {
-    .menu_open {
+    .menu_open,
+    .logo_block {
       color: $neutral-600;
     }
   }
@@ -53,9 +55,13 @@ body {
     }
   }
 
-  .menu_open {
-    transition: color calc($duration-base / 2) $out-cubic;
-    mix-blend-mode: difference;
+  .menu_open,
+  .logo_block {
+    transition:
+      color calc($duration-base / 2) $out-cubic,
+      background-color calc($duration-base / 2) $out-cubic;
+
+    //mix-blend-mode: difference;
   }
 
   .scroll-bar {

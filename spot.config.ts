@@ -1,3 +1,4 @@
+import { colorsVars } from '@/styles/config/colors'
 import { Theme } from '@/types'
 import { LenisOptions } from '@studio-freight/lenis'
 const goldenRatio = (1 + Math.sqrt(5)) / 2
@@ -10,13 +11,7 @@ const host =
     ? import.meta.env.VITE_PROD_URL
     : ''
 
-export const COLORS = {
-  neutral100: '#FFF',
-  neutral200: '#777C87',
-  neutral300: '#3A3F49',
-  neutral400: '#08090A',
-  red: '#E8210F'
-}
+export const COLORS = colorsVars
 
 const SPOT_CONFIG = {
   admin: {
@@ -35,25 +30,17 @@ const SPOT_CONFIG = {
 
   theme: {
     default: 'light' as Theme,
-    light: {
-      neutral100: COLORS.neutral100,
-      neutral200: COLORS.neutral200,
-      neutral300: COLORS.neutral300,
-      neutral400: COLORS.neutral400,
-      red: COLORS.red
-    },
-    dark: {
-      neutral100: COLORS.neutral400,
-      neutral200: COLORS.neutral200,
-      neutral300: COLORS.neutral300,
-      neutral400: COLORS.neutral100,
-      red: COLORS.red
-    }
+    light: colorsVars,
+    dark: colorsVars
   },
   media: {
     desktop: '(min-width: 1024px)',
+    tillTablet: '(min-width: 641px)',
     tablet: '(max-width: 1023px)',
-    mobile: '(max-width: 640px)'
+    mobile: '(max-width: 640px)',
+    landscape: '(min-aspect-ratio: 16/9)',
+    portrait: '(max-aspect-ratio: 9/16)',
+    square: '(min-aspect-ratio: 1/1) and (max-aspect-ratio: 4/3)'
   },
   breakpoints: {
     mobile: 767,

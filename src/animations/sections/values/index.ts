@@ -3,7 +3,11 @@ import { DrawSVGPlugin, ScrollTrigger, gsap } from '@gsap'
 
 const name = "[data-section='values']"
 
-const anim_sectionValues = (_ctx: any) => {
+const anim_sectionValues = (ctx: any) => {
+  ctx.conditions.tillTablet && anim_sectionValues_tillTablet(ctx)
+}
+
+const anim_sectionValues_tillTablet = (_ctx: any) => {
   const els = gsap.utils.toArray(name) as HTMLElement[]
   if (els.length === 0) return
 
@@ -17,9 +21,10 @@ const anim_sectionValues = (_ctx: any) => {
       scrollTrigger: {
         trigger: el,
         start: 'center center',
-        end: '+=3500',
+        end: '+=4250',
         scrub: true,
-        pin: true
+        pin: true,
+        fastScrollEnd: true
       }
     })
 
