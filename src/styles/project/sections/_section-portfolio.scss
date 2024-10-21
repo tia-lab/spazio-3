@@ -1,0 +1,15 @@
+@use '../../exports.scss' as *;
+
+.section_home_portfolio {
+  @include desktop {
+    .projects_list_item {
+      &:nth-child(2) {
+        top: 10.2rem;
+      }
+
+      &:nth-child(3) {
+        top: 14.4rem;
+      }
+    }
+  }
+}
