@@ -35,11 +35,7 @@ const anim_sectionIntro = (_ctx: any) => {
         scrub: 2,
         pin: true,
         start: 'center center',
-        end: '+4250',
-        fastScrollEnd: true,
-        onEnter: () => {
-          ScrollTrigger.refresh()
-        }
+        end: '+4250'
       }
     })
     tl.to(split.chars, { autoAlpha: 1, yPercent: 0, stagger: 0.01 })

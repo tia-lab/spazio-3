@@ -24,7 +24,13 @@ const anim_sectionValues_tillTablet = (_ctx: any) => {
         end: '+=4250',
         scrub: true,
         pin: true,
-        fastScrollEnd: true
+        fastScrollEnd: true,
+        onEnter: () => {
+          ScrollTrigger.refresh()
+        },
+        onLeave: () => {
+          ScrollTrigger.refresh()
+        }
       }
     })
 

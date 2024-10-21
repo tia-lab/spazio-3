@@ -4,6 +4,8 @@ const mode = ['dark', 'light', 'grey'] as const
 type Mode = (typeof mode)[number]
 
 const anim_section_color = (_ctx: any) => {
+  ScrollTrigger.refresh()
+
   const body = document.body
   if (!body) return
   const wrapper = body.querySelector('.page-wrapper')

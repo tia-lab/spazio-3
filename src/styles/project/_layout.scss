@@ -73,4 +73,8 @@ body {
       transition: background-color calc($duration-base / 2) $out-cubic;
     }
   }
+
+  .pixel {
+    padding-top: 100%;
+  }
 }

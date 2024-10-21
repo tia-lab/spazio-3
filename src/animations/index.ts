@@ -2,6 +2,7 @@ import { MEDIA } from '$/spot.config'
 import { useGsapMatchMedia } from '@/hooks'
 import { delay } from '@/utils'
 import anim_cursor_hover_default from './cursor/hover-default'
+import anim_linkText from './link-text'
 import anim_section_color from './section-colors'
 import anim_sectionFooter from './sections/footer'
 import anim_sectionIntro from './sections/intro'
@@ -21,12 +22,14 @@ const animations = () => {
       anim_test(c)
       anim_sectionIntro(c)
       anim_sectionValues(c)
-      anim_sectionPixels(c)
       anim_sectionPortfolio(c)
       anim_sectionTeam(c)
       anim_sectionFooter(c)
+      anim_sectionPixels(c)
+
       await delay(500)
       anim_section_color(c)
+      anim_linkText(c)
     },
     scope: document.body
   })

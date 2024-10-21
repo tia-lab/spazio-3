@@ -1,122 +1,84 @@
-import { gsap } from 'gsap'
-import * as THREE from 'three'
+import { ANIM_VAR, COLORS } from '$/spot.config'
+import { gsap } from 'gsap/all'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
+const directions = ['top', 'bottom'] as const
+type Direction = (typeof directions)[number]
 const name = "[data-section='pixels']"
 
 const anim_sectionPixels = (_ctx: any) => {
-  const sections = gsap.utils.toArray(name) as HTMLElement[]
+  const sections = document.querySelectorAll(name) as NodeListOf<HTMLElement>
   if (!sections.length) return
+  gsap.registerPlugin(ScrollTrigger)
 
   sections.forEach((section) => {
-    if (!section) {
-      console.error('Section not found!')
-      return
-    }
-
-    const pixelNumber = section.dataset.pixelSize || 35
-    const coloStart = Number(section.dataset.colorStart) || 0x000000
-    const coloEnd = Number(section.dataset.colorEnd) || 0xffffff
-
-    // Create a canvas element for each section
-    const canvas = document.createElement('canvas')
-    section.appendChild(canvas)
-
-    // Create the scene, camera, and renderer for each section
-    const scene = new THREE.Scene()
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      section.clientWidth / section.clientHeight,
-      0.1,
-      1000
-    )
-    const renderer = new THREE.WebGLRenderer({
-      canvas,
-      antialias: true,
-      alpha: true
+    if (!section) return
+    const rows = 5
+    const cols = 15
+    gsap.set(section, {
+      gridTemplateColumns: `repeat(${cols}, 1fr)`,
+      gridTemplateRows: `repeat(${rows}, 1fr)`,
+      zIndex: 2
     })
 
-    // Set renderer size to match the section
-    renderer.setSize(section.clientWidth, section.clientHeight)
-    renderer.setClearColor(0x000000, 0) // Transparent background
+    const color = section.dataset.pixelColor || COLORS.neutral600
+    const endColor = section.dataset.pixelColorEnd || COLORS.neutral100
+    const pixelOpacity = Boolean(section.dataset.pixelOpacity) || false
+    const direction: Direction =
+      (section.dataset.pixelDirection as Direction | undefined) &&
+      directions.includes(section.dataset.pixelDirection as Direction)
+        ? (section.dataset.pixelDirection as Direction)
+        : 'top'
 
-    // Calculate the number of pixels
-    const numPixelsX = Math.floor(section.clientWidth / 20)
-    const numPixelsY = Math.floor(section.clientHeight / 20)
-
-    // Create a pixelation shader material
-    const pixelationShader = {
-      uniforms: {
-        uTime: { value: 0 },
-        uResolution: {
-          value: new THREE.Vector2(section.clientWidth, section.clientHeight)
-        },
-        uPixelSize: { value: pixelNumber }, // Adjust this for pixel size
-        uColorStart: { value: new THREE.Color(coloStart) }, // Start color (black)
-        uColorEnd: { value: new THREE.Color(coloEnd) } // End color (white),
-      },
-      vertexShader: `
-        varying vec2 vUv;
-        void main() {
-          vUv = uv;
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        }
-      `,
-      fragmentShader: `
-        uniform float uPixelSize;
-        uniform vec3 uColorStart;
-        uniform vec3 uColorEnd;
-        uniform float uTime;
-        uniform vec2 uResolution;
-        varying vec2 vUv;
-
-        float random(vec2 st) {
-          return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
-        }
-
-        void main() {
-          vec2 pixelSize = uPixelSize / uResolution;
-          vec2 pixelatedUv = floor(vUv / pixelSize) * pixelSize;
-
-          float timeOffset = random(pixelatedUv) * 2.0;
-          float t = mod(uTime * 0.001 + timeOffset, 1.0);
-
-          vec3 color = mix(uColorStart, uColorEnd, t);
-
-          gl_FragColor = vec4(color, 1.0);
-        }
-      `
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < cols; j++) {
+        const el = document.createElement('div')
+        el.classList.add('pixel')
+        gsap.set(el, {
+          width: '100%',
+          paddingTop: '100%',
+          backgroundColor: color
+        })
+        section.appendChild(el)
+      }
     }
 
-    const shaderMaterial = new THREE.ShaderMaterial(pixelationShader)
+    const pixels = gsap.utils.toArray('.pixel', section) as HTMLElement[]
 
-    // Create a plane geometry for each section
-    const geometry = new THREE.PlaneGeometry(numPixelsX, numPixelsY)
-    const plane = new THREE.Mesh(geometry, shaderMaterial)
-    scene.add(plane)
-
-    camera.position.z = 5
-
-    // Handle window resizing and section resize
-    window.addEventListener('resize', () => {
-      const width = section.clientWidth
-      const height = section.clientHeight
-
-      renderer.setSize(width, height)
-      camera.aspect = width / height
-      camera.updateProjectionMatrix()
-
-      // Update the shader's resolution uniform
-      shaderMaterial.uniforms.uResolution.value.set(width, height)
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: direction === 'top' ? 'center center' : 'top bottom',
+        end: 'bottom top',
+        scrub: 1,
+        fastScrollEnd: true
+      }
     })
 
-    // Animation loop
-    function animate(time: number) {
-      shaderMaterial.uniforms.uTime.value = time
-      renderer.render(scene, camera)
-      requestAnimationFrame(animate)
-    }
-    animate(0)
+    tl.to(pixels, {
+      autoAlpha: pixelOpacity ? 0 : undefined,
+      backgroundColor: endColor,
+      yPercent: direction === 'top' ? -50 : 50,
+
+      stagger: {
+        from: 'random',
+        amount: ANIM_VAR.duration.default,
+        ease: ANIM_VAR.ease.in
+      }
+    })
+
+    gsap.to(section, {
+      yPercent: direction === 'top' ? -10 : 10,
+      duration: ANIM_VAR.duration.default * 5,
+      scrollTrigger: {
+        trigger: section,
+        start: 'center center',
+        end: 'bottom top',
+        scrub: 1
+      }
+    })
   })
 }
 
+// Initialize or export the function
 export default anim_sectionPixels

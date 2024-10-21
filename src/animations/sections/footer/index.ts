@@ -11,7 +11,7 @@ const anim_sectionFooter = (_ctx: any) => {
 
   sections.forEach((section) => {
     const head = '.footer_head'
-    const headItems = '.footer_head h2, .footer_head a'
+    const headItems = '.footer_title'
     const logo = '.footer_logo'
     const logo_svg = '.footer_logo svg path'
     const links = gsap.utils.toArray(
@@ -19,12 +19,18 @@ const anim_sectionFooter = (_ctx: any) => {
       section
     )
     const bottom_line = section.querySelector('.top_line')
-    const bottom_links = '.footer_bottom_links div, .footer_bottom_links a'
+    const bottom_links = '.footer_bottom_links>div, .footer_bottom_links>a'
     const linkHeroz = '[data-link-heroz]'
+    const copyright = section.querySelector('[data-copyright]')
 
     const defaults: GSAPTweenVars = {
       duration: ANIM_VAR.duration.default,
       ease: ANIM_VAR.ease.out
+    }
+
+    if (copyright) {
+      const currentYear = new Date().getFullYear()
+      copyright.innerHTML = currentYear.toString()
     }
 
     const tlHead = gsap.timeline({

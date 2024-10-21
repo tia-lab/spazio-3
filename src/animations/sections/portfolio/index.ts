@@ -37,10 +37,13 @@ const anim_sectionPortfolio_desktop = (ctx: any) => {
       scrollTrigger: {
         trigger: section,
         start: start,
-        end: '+=6000',
+        end: '+=8000',
         scrub: 1,
         pin: true,
         fastScrollEnd: true,
+        onEnter: () => {
+          ScrollTrigger.refresh()
+        },
         snap: {
           snapTo: 'labels',
           duration: { min: 0.5, max: 1 },
@@ -98,7 +101,10 @@ const anim_sectionPortfolio_desktop = (ctx: any) => {
           prevBody,
           {
             height: 0,
-            autoAlpha: 0
+            autoAlpha: 0,
+            onComplete: () => {
+              ScrollTrigger.refresh()
+            }
           },
           0
         )

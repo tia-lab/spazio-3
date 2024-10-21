@@ -1,4 +1,5 @@
-import { MEDIA } from '@config'
+//@ts-ignore
+import { MEDIA } from '$/spot.config'
 import SCSSVars from '../types'
 
 export const spacingVars = {

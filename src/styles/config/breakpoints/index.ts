@@ -1,4 +1,4 @@
-import { SPOT_CONFIG } from '@config'
+import { SPOT_CONFIG } from '$/spot.config'
 import SCSSVars from '../types'
 
 const breakpointsVars = {

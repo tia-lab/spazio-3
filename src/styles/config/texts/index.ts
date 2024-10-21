@@ -1,4 +1,4 @@
-import { MEDIA } from '@config'
+import { MEDIA } from '$/spot.config'
 import SCSSVars from '../types'
 
 export const textVars = {
