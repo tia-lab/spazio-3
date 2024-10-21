@@ -3,11 +3,13 @@ import { ScrollTrigger, gsap } from '@gsap'
 
 const name = "[data-section='footer']"
 
-const anim_sectionFooter = (_ctx: any) => {
+const anim_sectionFooter = (ctx: any) => {
   const sections = gsap.utils.toArray(name) as HTMLElement[]
   if (sections.length === 0) return
 
   gsap.registerPlugin(ScrollTrigger)
+
+  const isDesktop = ctx.conditions.desktop
 
   sections.forEach((section) => {
     const head = '.footer_head'
@@ -35,7 +37,10 @@ const anim_sectionFooter = (_ctx: any) => {
 
     const tlHead = gsap.timeline({
       defaults,
-      scrollTrigger: { trigger: head }
+      scrollTrigger: {
+        trigger: head,
+        start: isDesktop ? 'top 80%' : 'top bottom'
+      }
     })
     tlHead.from(headItems, {
       autoAlpha: 0,
