@@ -69,7 +69,7 @@ const anim_sectionPortfolio_desktop = (ctx: any) => {
 
       // Set initial height and opacity to 0 for all except the first one
       if (i !== 0) {
-        gsap.set(body, { height: 0, autoAlpha: 0 })
+        gsap.set(body, { height: 0 })
       }
 
       // Add label for snap functionality
@@ -81,14 +81,12 @@ const anim_sectionPortfolio_desktop = (ctx: any) => {
       // Animate the current section's body to open smoothly with easing
       timeline
         .to(body, {
-          height: 'auto',
-          autoAlpha: 1
+          height: 'auto'
         })
         .to(
           head,
           {
-            y: 0,
-            autoAlpha: 1
+            y: 0
           },
           '-=0.5'
         )
@@ -101,7 +99,7 @@ const anim_sectionPortfolio_desktop = (ctx: any) => {
           prevBody,
           {
             height: 0,
-            autoAlpha: 0,
+
             onComplete: () => {
               ScrollTrigger.refresh()
             }

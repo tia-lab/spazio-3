@@ -58,7 +58,7 @@ const anim_sectionPixels = (_ctx: any) => {
     tl.to(pixels, {
       autoAlpha: pixelOpacity ? 0 : undefined,
       backgroundColor: endColor,
-      yPercent: direction === 'top' ? -50 : 50,
+      //yPercent: direction === 'top' ? -50 : 50,
 
       stagger: {
         from: 'random',
@@ -68,7 +68,7 @@ const anim_sectionPixels = (_ctx: any) => {
     })
 
     gsap.to(section, {
-      yPercent: direction === 'top' ? -10 : 10,
+      yPercent: direction === 'top' ? -20 : 20,
       duration: ANIM_VAR.duration.default * 5,
       scrollTrigger: {
         trigger: section,

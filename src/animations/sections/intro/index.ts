@@ -26,8 +26,8 @@ const anim_sectionIntro = (_ctx: any) => {
     })
 
     gsap.set(split.words, { overflow: 'hidden' })
-    gsap.set(split.chars, { autoAlpha: 0, yPercent: 100 })
-
+    gsap.set(split.chars, { autoAlpha: 0, yPercent: 0 })
+    gsap.set(split.chars, { color: COLORS.neutral600 })
     const tl = gsap.timeline({
       defaults,
       scrollTrigger: {
@@ -35,12 +35,14 @@ const anim_sectionIntro = (_ctx: any) => {
         scrub: 2,
         pin: true,
         start: 'center center',
-        end: '+4250'
+        end: '+4500'
       }
     })
-    tl.to(split.chars, { autoAlpha: 1, yPercent: 0, stagger: 0.01 })
-      .to(split.chars, { color: COLORS.neutral600, stagger: 0.01 }, '<+=0.5')
-      .from(text, { autoAlpha: 0, y: '2rem' }, '<+=1')
+    tl.to(split.chars, { autoAlpha: 1, stagger: 0.01 }).from(
+      text,
+      { autoAlpha: 0, y: '2rem' },
+      '<+=1'
+    )
   })
 }
 

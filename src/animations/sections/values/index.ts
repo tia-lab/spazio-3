@@ -36,12 +36,13 @@ const anim_sectionValues_tillTablet = (_ctx: any) => {
 
     cards.forEach((card, i) => {
       const icon = card.querySelector('.card_values_icon')
+      const iconPath = card.querySelectorAll('.card_values_icon_svg path')
       const text = card.querySelector('.card_values_text')
       const border = card.querySelector('.card_values_border svg rect')
       gsap.set(card, { y: `${i * 10.5}rem`, autoAlpha: 0 })
-      gsap.set(icon, { autoAlpha: 0, y: '-2rem' })
-      gsap.set(text, { autoAlpha: 0, y: '2rem' })
-      gsap.set(border, { drawSVG: '0%' })
+
+      gsap.set(text, { yPercent: 150 })
+      gsap.set([border, iconPath], { drawSVG: '0%' })
 
       // Create a custom timeline for each card
       const cardTimeline = gsap.timeline({
@@ -66,11 +67,23 @@ const anim_sectionValues_tillTablet = (_ctx: any) => {
           },
           0
         )
-        .to([icon, text], {
+        .to(iconPath, {
+          drawSVG: '100%',
+          stagger: { amount: ANIM_VAR.duration.default, from: 'random' }
+        })
+        .to(text, {
           autoAlpha: 1,
-          y: 0,
+          yPercent: 0,
           stagger: ANIM_VAR.duration.default / ANIM_VAR.duration.goldenRatio
         })
+        .to(
+          iconPath,
+          {
+            fillOpacity: 1,
+            stagger: { amount: ANIM_VAR.duration.default, from: 'random' }
+          },
+          '<'
+        )
 
       // Add each card's timeline to the master timeline with a slight stagger
       masterTimeline.add(cardTimeline, i * 0.3)
