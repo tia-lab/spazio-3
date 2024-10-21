@@ -77,7 +77,7 @@ const SPOT_CONFIG = {
     lenis: true,
     cursor: true,
     theme: false,
-    scrollbar: true,
+    scrollbar: false,
     transition: true,
     preload: true,
     i18n: true,

@@ -33,7 +33,7 @@ const anim_sectionPixels = (_ctx: any) => {
     for (let i = 0; i < rows; i++) {
       for (let j = 0; j < cols; j++) {
         const el = document.createElement('div')
-        el.classList.add('pixel')
+        el.classList.add('pixels_pixel')
         gsap.set(el, {
           width: '100%',
           paddingTop: '100%',
@@ -43,7 +43,7 @@ const anim_sectionPixels = (_ctx: any) => {
       }
     }
 
-    const pixels = gsap.utils.toArray('.pixel', section) as HTMLElement[]
+    const pixels = gsap.utils.toArray('.pixels_pixel', section) as HTMLElement[]
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -64,17 +64,6 @@ const anim_sectionPixels = (_ctx: any) => {
         from: 'random',
         amount: ANIM_VAR.duration.default,
         ease: ANIM_VAR.ease.in
-      }
-    })
-
-    gsap.to(section, {
-      yPercent: direction === 'top' ? -20 : 20,
-      duration: ANIM_VAR.duration.default * 5,
-      scrollTrigger: {
-        trigger: section,
-        start: 'center center',
-        end: 'bottom top',
-        scrub: 1
       }
     })
   })

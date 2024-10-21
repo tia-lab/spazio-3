@@ -4,11 +4,11 @@ export const colorsVars = {
   white: '#fff',
   black: '#000',
   neutral100: '#fff',
-  neutral200: '#edecf6',
-  neutral300: '#cbc9da',
-  neutral400: '#676573',
-  neutral500: '#26252c',
-  neutral600: '#17171a'
+  neutral200: '#f6f6f6',
+  neutral300: '#dadada',
+  neutral400: '#737373',
+  neutral500: '#2c2c2c',
+  neutral600: '#000000'
 }
 
 export const colors: SCSSVars = [

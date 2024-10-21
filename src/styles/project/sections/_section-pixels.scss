@@ -1,0 +1,10 @@
+@use '../../exports.scss' as *;
+
+.section_pixels {
+  @include desktop {
+    .pixels_pixel {
+      width: 100%;
+      padding-top: 100%;
+    }
+  }
+}
