@@ -22,7 +22,7 @@ export const layoutSpacingVars = {
   base: '16',
 
   containerGutter: { default: '1.5rem', [MEDIA.tablet]: '1rem' },
-  pageWidth: '2200px',
+  pageWidth: '2500px',
   padding: {
     global: { default: '1.5rem', [MEDIA.tablet]: '1rem' },
     vertical: {
