@@ -51,7 +51,7 @@ const animation_pixels = (section: HTMLElement) => {
       scrollTrigger: {
         trigger: trigger,
         scrub: 1,
-        markers: true,
+        //markers: true,
         start: 'top bottom',
         end: 'top center'
       },
@@ -81,7 +81,7 @@ const animation_exit = (section: HTMLElement, _ctx: any) => {
       scrollTrigger: {
         trigger: startTrigger,
         endTrigger: endTrigger,
-        markers: true,
+        //markers: true,
         id: 'exit',
         scrub: true
       }
@@ -89,7 +89,10 @@ const animation_exit = (section: HTMLElement, _ctx: any) => {
 
     tl.to(names, {
       opacity: 0,
-      stagger: { amount: 0.5, from: 'random' }
+      translateZ: -25,
+      scale: 0.5,
+      duration: ANIM_VAR.duration.default / 3,
+      stagger: { each: 0.1, from: 'random' }
     })
       .to(title, { translateZ: 150, scale: 2, opacity: 0 }, '<')
       .to(
