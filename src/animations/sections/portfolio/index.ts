@@ -28,7 +28,6 @@ const anim_desktop = (_ctx: any, section: HTMLElement) => {
 
     const items = gsap.utils.toArray('.project', section) as HTMLElement[]
 
-    items[items.length - 1].appendChild(spacer)
     const clone = items[items.length - 1].cloneNode(true) as HTMLElement
     clone.classList.add('is-last')
     list?.appendChild(clone)
