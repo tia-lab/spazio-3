@@ -30,6 +30,12 @@ const anim_sectionValues_tillTablet = (_ctx: any) => {
         },
         onLeave: () => {
           ScrollTrigger.refresh()
+        },
+        onEnterBack: () => {
+          ScrollTrigger.refresh()
+        },
+        onLeaveBack: () => {
+          ScrollTrigger.refresh()
         }
       }
     })

@@ -1,6 +1,6 @@
 @use '../../exports.scss' as *;
 
-.section_home_portfolio {
+.section_portfolio {
   @include desktop {
     .projects_list_item {
       &:nth-child(2) {
@@ -10,6 +10,29 @@
       &:nth-child(3) {
         top: 14.4rem;
       }
+
+      &:nth-child(4) {
+        top: 18.6rem;
+      }
     }
+
+    .project {
+      &.is-last {
+        opacity: 0;
+        height: 10vh;
+      }
+    }
+  }
+
+  .end_project_trigger {
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    background-color: darkorange;
+  }
+
+  .portfolio_pixels {
+    pointer-events: none;
   }
 }

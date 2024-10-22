@@ -5,19 +5,14 @@ import { ScrollTrigger, gsap } from '@gsap'
 const name = "[data-section='hero']"
 
 const anim_sectionHero = (ctx: any) => {
-  ctx.conditions.desktop && anim_sectionPortfolio_desktop(ctx)
+  ctx.conditions.desktop && anim_desktop(ctx)
 }
 
-const anim_sectionPortfolio_desktop = (ctx: any) => {
+const anim_desktop = (ctx: any) => {
   const sections = gsap.utils.toArray(name) as HTMLElement[]
   if (sections.length === 0) return
 
   gsap.registerPlugin(ScrollTrigger)
-
-  const defaults: GSAPTweenVars = {
-    duration: ANIM_VAR.duration.default,
-    ease: ANIM_VAR.ease.none
-  }
 
   sections.forEach((section) => {
     animation_pixels(section)
@@ -33,9 +28,11 @@ const animation_pixels = (section: HTMLElement) => {
   )
   pixelContainers.forEach((container) => {
     // Generate pixels grid for each container
+    const color = '0,0,0'
     const { pixels, shuffledPixels, canvas, context } = generatePixelGrid({
       container,
-      cols: 15
+      cols: 15,
+      color
     })
 
     const trigger = section.querySelector('.pixel_trigger')
@@ -44,7 +41,7 @@ const animation_pixels = (section: HTMLElement) => {
       console.error('Pixel grid generation failed')
       return
     }
-    drawPixels(pixels, context, canvas)
+    drawPixels({ pixels, context, canvas, color })
     // Animate the shuffled pixels using GSAP
     gsap.to(shuffledPixels, {
       stagger: { amount: 1, from: 'random' },
@@ -58,7 +55,7 @@ const animation_pixels = (section: HTMLElement) => {
 
       opacity: 0, // Fade out pixel opacity
       duration: ANIM_VAR.duration.default / 2, // Use ANIM_VAR for faster fade-out
-      onUpdate: () => drawPixels(pixels, context, canvas), // Redraw pixels every time opacity changes
+      onUpdate: () => drawPixels({ pixels, context, canvas, color }), // Redraw pixels every time opacity changes
       ease: ANIM_VAR.ease.out // Use custom easing from ANIM_VAR
     })
   })
@@ -94,12 +91,8 @@ const animation_exit = (section: HTMLElement, _ctx: any) => {
       duration: ANIM_VAR.duration.default / 3,
       stagger: { each: 0.1, from: 'random' }
     })
-      .to(title, { translateZ: 150, scale: 2, opacity: 0 }, '<')
-      .to(
-        splineWrap,
-        { translateZ: '-100px', duration: 1, scale: 0.25 },
-        '>-=0.5'
-      )
+      .to(title, { translateZ: -120, scale: 1.7, opacity: 0 }, '<')
+      .to(splineWrap, { translateZ: -100, duration: 1, scale: 0.25 }, '>-=0.5')
 
       .to(splineWrap, { opacity: 0, delay: 0.2, duration: 0.25 }, '<')
   }, section)

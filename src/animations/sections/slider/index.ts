@@ -1,22 +1,26 @@
 import { ANIM_VAR } from '$/spot.config'
 import { drawPixels, generatePixelGrid } from '@/animations/pixels'
-import { ScrollTrigger, SplitText, gsap } from '@gsap'
+import { ScrollTrigger, gsap } from '@gsap'
 
-const name = "[data-section='intro']"
+const name = "[data-section='slider']"
 
-const anim_sectionIntro = (_ctx: any) => {
+const anim_sectionSlider = (ctx: any) => {
+  ctx.conditions.desktop && anim_desktop(ctx)
+}
+
+const anim_desktop = (ctx: any) => {
   const sections = gsap.utils.toArray(name) as HTMLElement[]
   if (sections.length === 0) return
 
-  gsap.registerPlugin(SplitText, ScrollTrigger)
+  gsap.registerPlugin(ScrollTrigger)
 
   sections.forEach((section) => {
     animation_pixels(section)
-    anim_section(section, _ctx)
+    //animation_exit(section, ctx)
   })
 }
 
-export default anim_sectionIntro
+/* Animation Pixels */
 
 const animation_pixels = (section: HTMLElement) => {
   const pixelContainers = Array.from(
@@ -24,7 +28,7 @@ const animation_pixels = (section: HTMLElement) => {
   )
   pixelContainers.forEach((container) => {
     // Generate pixels grid for each container
-    const color = '255, 255, 255'
+    const color = '0,0,0'
     const { pixels, shuffledPixels, canvas, context } = generatePixelGrid({
       container,
       cols: 15,
@@ -57,60 +61,45 @@ const animation_pixels = (section: HTMLElement) => {
   })
 }
 
-const anim_section = (section: HTMLElement, _ctx: any) => {
-  if (!section) return
-
-  const defaults: GSAPTweenVars = {
-    duration: ANIM_VAR.duration.default,
-    ease: ANIM_VAR.ease.out
-  }
-
+/* Animatio Exit */
+const animation_exit = (section: HTMLElement, _ctx: any) => {
   gsap.context(() => {
-    const heading = '[data-intro-title]'
-    const text = '[data-intro-text]'
-    const titleWrap = '.intro_title'
-    const textWrap = '.intro_text'
-    const mainWrapper = '.main-wrapper'
+    const startTrigger = '.trigger_exit'
+    const endTrigger = '.pixel_trigger'
+    const splineWrap = '.hero_spline_wrap'
+    const names = '.hero_name'
+    const title = '.hero_title'
+    const defaults: GSAPTweenVars = {
+      ease: ANIM_VAR.ease.out
+    }
 
-    const split = new SplitText(heading, {
-      type: 'lines, chars',
-      linesClass: 'intro_title_line',
-      charsClass: 'intro_title_char'
-    })
-
-    gsap.set(split.chars, { autoAlpha: 0 })
-
-    const trigger = '.trigger_enter'
-    const endTrigger = '.trigger_exit'
-    const pixelTrigger = '.pixel_trigger'
-
-    const tlEnter = gsap.timeline({
+    const tl = gsap.timeline({
       defaults,
       scrollTrigger: {
-        trigger: trigger,
+        trigger: startTrigger,
         endTrigger: endTrigger,
-        scrub: true,
-        markers: true,
-        end: 'top bottom'
+        //markers: true,
+        id: 'exit',
+        scrub: true
       }
     })
-    tlEnter
-      .to(split.chars, { autoAlpha: 1, stagger: 0.2, duration: 0 })
-      .from(text, { autoAlpha: 0, y: '2rem', duration: 3, delay: 5 }, 0)
 
-    const tlExit = gsap.timeline({
-      defaults,
-      scrollTrigger: {
-        trigger: pixelTrigger,
-        //endTrigger: pixelTrigger,
-        scrub: true,
-
-        start: 'top 75%',
-        end: 'top 50%'
-      }
+    tl.to(names, {
+      opacity: 0,
+      translateZ: -25,
+      scale: 0.5,
+      duration: ANIM_VAR.duration.default / 3,
+      stagger: { each: 0.1, from: 'random' }
     })
-    tlExit
-      .to(mainWrapper, { autoAlpha: 0, duration: 0.01 })
-      .to(section, { pointerEvents: 'none', duration: 0.01 }, 0)
+      .to(title, { translateZ: 150, scale: 2, opacity: 0 }, '<')
+      .to(
+        splineWrap,
+        { translateZ: '-100px', duration: 1, scale: 0.25 },
+        '>-=0.5'
+      )
+
+      .to(splineWrap, { opacity: 0, delay: 0.2, duration: 0.25 }, '<')
   }, section)
 }
+
+export default anim_sectionSlider

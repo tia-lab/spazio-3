@@ -27,7 +27,7 @@ export function shuffleArray<T>(array: T[]): T[] {
 export function generatePixelGrid({
   container,
   cols,
-  color = 'rgb(0, 0, 0)'
+  color = '0, 0, 0'
 }: GeneratePixel) {
   const canvas = document.createElement('canvas')
   const context = canvas.getContext('2d')
@@ -67,7 +67,7 @@ export function generatePixelGrid({
         y: j * pixelHeight,
         width, // Adjust width for the last column
         height, // Adjust height for the last row
-        color: color, // Start as black
+        color: `rgb(${color})`, // Start as black
         opacity: 1 // Start with full opacity
       })
     }
@@ -79,14 +79,23 @@ export function generatePixelGrid({
 }
 
 // Function to draw pixels on the canvas
-export function drawPixels(
-  pixels: Pixel[],
-  context: CanvasRenderingContext2D,
+
+interface DrawPixels {
+  pixels: Pixel[]
+  context: CanvasRenderingContext2D
   canvas: HTMLCanvasElement
-): void {
+  color?: string
+}
+
+export function drawPixels({
+  pixels,
+  context,
+  canvas,
+  color = '0, 0, 0'
+}: DrawPixels): void {
   context.clearRect(0, 0, canvas.width, canvas.height) // Clear the canvas
   pixels.forEach((pixel) => {
-    context.fillStyle = `rgba(0, 0, 0, ${pixel.opacity})` // Always black, with varying opacity
+    context.fillStyle = `rgba(${color}, ${pixel.opacity})` // Always black, with varying opacity
     context.fillRect(pixel.x, pixel.y, pixel.width, pixel.height) // Draw each pixel precisely
   })
 }
