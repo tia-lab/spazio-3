@@ -46,7 +46,7 @@ const animation_pixels = (section: HTMLElement) => {
         trigger: trigger,
         endTrigger: endTrigger,
         scrub: 1,
-        markers: true,
+        //markers: true,
         start: 'top bottom',
         end: 'top bottom'
       },

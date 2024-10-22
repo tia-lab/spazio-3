@@ -90,7 +90,7 @@ const anim_section = (section: HTMLElement, _ctx: any) => {
         trigger: trigger,
         endTrigger: endTrigger,
         scrub: true,
-        markers: true,
+        //markers: true,
         end: 'top bottom'
       }
     })
