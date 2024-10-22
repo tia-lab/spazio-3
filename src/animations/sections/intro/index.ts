@@ -19,13 +19,11 @@ const anim_sectionIntro = (_ctx: any) => {
     const text = '[data-intro-text]'
 
     const split = new SplitText(heading, {
-      type: 'lines, chars, words',
+      type: 'lines, chars',
       linesClass: 'intro_title_line',
-      charsClass: 'intro_title_char',
-      wordsClass: 'intro_title_word'
+      charsClass: 'intro_title_char'
     })
 
-    gsap.set(split.words, { overflow: 'hidden' })
     gsap.set(split.chars, { autoAlpha: 0, yPercent: 0 })
     gsap.set(split.chars, { color: COLORS.neutral600 })
     const tl = gsap.timeline({
@@ -35,13 +33,13 @@ const anim_sectionIntro = (_ctx: any) => {
         scrub: 2,
         pin: true,
         start: 'center center',
-        end: '+4500'
+        end: '+9000'
       }
     })
-    tl.to(split.chars, { autoAlpha: 1, stagger: 0.01 }).from(
+    tl.to(split.chars, { autoAlpha: 1, stagger: 0.2, duration: 0 }).from(
       text,
-      { autoAlpha: 0, y: '2rem' },
-      '<+=1'
+      { autoAlpha: 0, y: '2rem', duratio: 3 },
+      '>-=1'
     )
   })
 }

@@ -59,7 +59,7 @@ const anim_sectionPixels = (_ctx: any) => {
       autoAlpha: pixelOpacity ? 0 : undefined,
       backgroundColor: endColor,
       //yPercent: direction === 'top' ? -50 : 50,
-
+      duration: 0,
       stagger: {
         from: 'random',
         amount: ANIM_VAR.duration.default,
