@@ -64,7 +64,6 @@ const anim_enter = (section: HTMLElement, ctx: any) => {
     const isDesktop = ctx.conditions.desktop
 
     const trigger = '.footer_animation_trigger'
-    const head = '.footer_head'
     const headItems = '.footer_title'
     const logo = '.footer_logo'
     const logo_svg = '.footer_logo svg path'

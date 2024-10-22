@@ -37,7 +37,7 @@ const anim_desktop = (_ctx: any, section: HTMLElement) => {
   }, section)
 }
 
-const anim_exit = (ctx: any, section: HTMLElement) => {
+const anim_exit = (_ctx: any, section: HTMLElement) => {
   gsap.context(() => {
     const trigger = '.exit_trigger'
     const wrapper = '.main-wrapper.is-portfolio'
@@ -46,10 +46,10 @@ const anim_exit = (ctx: any, section: HTMLElement) => {
       opacity: 0,
       scrollTrigger: {
         trigger,
-        start: 'top 77%',
-        end: 'top 77%',
-        scrub: 1
-        // markers: true
+        start: 'top bottom',
+        end: 'top bottom',
+        scrub: 1,
+        markers: true
       }
     })
   }, section)

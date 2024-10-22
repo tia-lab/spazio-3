@@ -68,8 +68,6 @@ const anim_section = (section: HTMLElement, _ctx: any) => {
   gsap.context(() => {
     const heading = '[data-intro-title]'
     const text = '[data-intro-text]'
-    const titleWrap = '.intro_title'
-    const textWrap = '.intro_text'
     const mainWrapper = '.main-wrapper'
 
     const split = new SplitText(heading, {

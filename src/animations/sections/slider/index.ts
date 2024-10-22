@@ -8,7 +8,7 @@ const anim_sectionSlider = (ctx: any) => {
   ctx.conditions.desktop && anim_desktop(ctx)
 }
 
-const anim_desktop = (ctx: any) => {
+const anim_desktop = (_ctx: any) => {
   const sections = gsap.utils.toArray(name) as HTMLElement[]
   if (sections.length === 0) return
 
@@ -62,7 +62,7 @@ const animation_pixels = (section: HTMLElement) => {
 }
 
 /* Animatio Exit */
-const animation_exit = (section: HTMLElement, _ctx: any) => {
+const _animation_exit = (section: HTMLElement, _ctx: any) => {
   gsap.context(() => {
     const startTrigger = '.trigger_exit'
     const endTrigger = '.pixel_trigger'

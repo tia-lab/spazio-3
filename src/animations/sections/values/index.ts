@@ -41,7 +41,6 @@ const anim_sectionValues_tillTablet = (_ctx: any) => {
     })
 
     cards.forEach((card, i) => {
-      const icon = card.querySelector('.card_values_icon')
       const iconPath = card.querySelectorAll('.card_values_icon_svg path')
       const text = card.querySelector('.card_values_text')
       const border = card.querySelector('.card_values_border svg rect')

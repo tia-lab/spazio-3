@@ -5,7 +5,7 @@ export const colorsVars = {
   black: '#000',
   neutral100: '#fff',
   neutral200: '#f6f6f6',
-  neutral300: '#dadada',
+  neutral300: '#E6E6E6',
   neutral400: '#737373',
   neutral500: '#2c2c2c',
   neutral600: '#000000'
