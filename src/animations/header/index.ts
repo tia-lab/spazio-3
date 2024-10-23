@@ -21,7 +21,7 @@ const anim_header = async (_ctx: any) => {
       const openButton = section.querySelector("[data-button='open-nav']")
       const menuButtons = gsap.utils.toArray(
         '.menu_button',
-        section
+        nav
       ) as HTMLElement[]
       const animNav = anim_nav()
       const lenis = useLenis()?.lenis
@@ -38,12 +38,14 @@ const anim_header = async (_ctx: any) => {
         },
         onClick: () => {
           if (section.dataset.open === 'false') {
+            lenis?.stop()
             openButton?.classList.add('is-open')
             animNav?.play().eventCallback('onComplete', () => {
               section.setAttribute('data-open', 'true')
             })
           }
           if (section.dataset.open === 'true') {
+            lenis?.start()
             animNav?.reverse().eventCallback('onReverseComplete', () => {
               section.setAttribute('data-open', 'false')
               openButton?.classList.remove('is-open')
@@ -69,8 +71,10 @@ const anim_header = async (_ctx: any) => {
           target: button,
           onClick: () => {
             if (anchor) {
+              lenis?.start()
               lenis?.scrollTo(anchor, { duration: 0.25 })
               if (section.dataset.open === 'true') {
+                console.log('close')
                 animNav?.reverse().eventCallback('onReverseComplete', () => {
                   section.setAttribute('data-open', 'false')
                   openButton?.classList.remove('is-open')
@@ -81,8 +85,6 @@ const anim_header = async (_ctx: any) => {
           }
         })
       })
-
-      //Ancjor Links
     }, section)
   })
 }
