@@ -20,23 +20,9 @@ const anim_sectionValues_tillTablet = (_ctx: any) => {
     const masterTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: el,
-        start: 'center center',
-        end: '+=4250',
-        scrub: true,
-        pin: true,
-        fastScrollEnd: true,
-        onEnter: () => {
-          ScrollTrigger.refresh()
-        },
-        onLeave: () => {
-          ScrollTrigger.refresh()
-        },
-        onEnterBack: () => {
-          ScrollTrigger.refresh()
-        },
-        onLeaveBack: () => {
-          ScrollTrigger.refresh()
-        }
+        start: 'top center',
+        end: 'bottom bottom',
+        scrub: true
       }
     })
 

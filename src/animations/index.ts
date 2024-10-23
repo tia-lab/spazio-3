@@ -17,8 +17,15 @@ const animations = () => {
   useGsapMatchMedia({
     media: MEDIA,
     callback: async (c) => {
+      const isPreload = sessionStorage.getItem('preload')
+      if (isPreload) {
+        anim_sectionHero(c)
+      } else {
+        await delay(5000)
+        anim_sectionHero(c)
+      }
+
       await anim_header(c)
-      anim_sectionHero(c)
       anim_sectionIntro(c)
       anim_sectionSlider(c)
       anim_sectionValues(c)

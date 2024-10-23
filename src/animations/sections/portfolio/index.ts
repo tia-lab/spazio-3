@@ -48,8 +48,8 @@ const anim_exit = (_ctx: any, section: HTMLElement) => {
         trigger,
         start: 'top bottom',
         end: 'top bottom',
-        scrub: 1,
-        markers: true
+        scrub: 1
+        //markers: true
       }
     })
   }, section)

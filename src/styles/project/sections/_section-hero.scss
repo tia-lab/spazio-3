@@ -5,4 +5,11 @@
     width: 100%;
     height: 100%;
   }
+
+  &.is-animate {
+    .main-wrapper,
+    .hero_spline_wrap {
+      opacity: 0;
+    }
+  }
 }

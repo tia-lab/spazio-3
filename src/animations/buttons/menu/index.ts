@@ -1,4 +1,5 @@
 import { ANIM_VAR } from '$/spot.config'
+import { collectionItemsCount } from '@/utils'
 import { ScrollTrigger, gsap } from '@gsap'
 
 const name = '[data-anim="menu-button"]'
@@ -19,13 +20,14 @@ const anim_menuButton = async (_ctx: any) => {
       const icon = '.menu_button_icon'
       const paths = gsap.utils.toArray('path', button) as SVGPathElement[]
       const text = '.text-menu-btn'
+      const counter = button.querySelector('[data-count]') as HTMLElement
       gsap.set(paths, { rotate: 45, transformOrigin: 'center' })
       gsap.set(paths[1], { yPercent: 70, xPercent: 70 })
       gsap.set(paths[2], { yPercent: 70, xPercent: -70 })
-      gsap.set([icon, text], { left: '-7.5rem' })
+      gsap.set([icon, text, counter], { left: '-7.5rem' })
 
       const tl = gsap.timeline({ paused: true, defaults })
-      tl.to([icon, text], { left: 0 })
+      tl.to([icon, text, counter], { left: 0 })
         .to(paths, { rotate: 0 }, 0.1)
         .to(paths[1], { yPercent: 0, xPercent: 0 }, '<')
         .to(paths[2], { yPercent: 0, xPercent: 0 }, '<')
@@ -35,6 +37,24 @@ const anim_menuButton = async (_ctx: any) => {
         onHover: () => tl.play(),
         onHoverEnd: () => tl.reverse()
       })
+
+      //Counters
+      setTimeout(() => {
+        if (counter && counter.dataset.count) {
+          console.log('count')
+          const items = collectionItemsCount({
+            attribute: `[data-count-items="${counter.dataset.count}"]`,
+            toString: true
+          }) as string
+
+          if (items) {
+            const target = counter.querySelector(
+              '.text-menu-counter'
+            ) as HTMLElement
+            target && (target.innerHTML = items)
+          }
+        }
+      }, 200)
     }, button)
   })
 }

@@ -1,4 +1,7 @@
 // Define the structure for a pixel object
+
+import { ScrollTrigger, gsap } from '@gsap'
+
 interface Pixel {
   x: number
   y: number
@@ -13,7 +16,7 @@ interface GeneratePixel {
   cols: number
   color?: string
 }
-
+gsap.registerPlugin(ScrollTrigger)
 // Function to shuffle an array (Fisher-Yates shuffle algorithm)
 export function shuffleArray<T>(array: T[]): T[] {
   for (let i = array.length - 1; i > 0; i--) {
@@ -29,7 +32,13 @@ export function generatePixelGrid({
   cols,
   color = '0, 0, 0'
 }: GeneratePixel) {
-  const canvas = document.createElement('canvas')
+  // Check if canvas already exists, if so, reuse it
+  let canvas = container.querySelector('canvas')
+  if (!canvas) {
+    canvas = document.createElement('canvas')
+    container.appendChild(canvas)
+  }
+
   const context = canvas.getContext('2d')
   if (!context) {
     console.error('Canvas context not available')
@@ -38,16 +47,16 @@ export function generatePixelGrid({
 
   // Disable image smoothing for sharp pixels
   context.imageSmoothingEnabled = false
-  container.appendChild(canvas)
 
   // Adjust canvas size to fill container
   function resizeCanvas(): void {
-    canvas.width = container.offsetWidth
-    canvas.height = container.offsetHeight
+    canvas!.width = container.offsetWidth
+    canvas!.height = container.offsetHeight
+    ScrollTrigger.refresh()
   }
 
-  window.addEventListener('resize', resizeCanvas)
-  resizeCanvas() // Initial call to set up canvas
+  // Resize the canvas to match container size
+  resizeCanvas()
 
   const pixelWidth = Math.floor(canvas.width / cols)
   const pixelHeight = pixelWidth // Ensure square pixels
@@ -55,19 +64,19 @@ export function generatePixelGrid({
 
   const pixels: Pixel[] = []
 
-  // Initialize pixel grid, all black at the start
+  // Initialize pixel grid with specified color
   for (let i = 0; i < cols; i++) {
     for (let j = 0; j < rows; j++) {
-      const width = i === cols - 1 ? canvas.width - i * pixelWidth : pixelWidth // Last column width adjustment
+      const width = i === cols - 1 ? canvas!.width - i * pixelWidth : pixelWidth
       const height =
-        j === rows - 1 ? canvas.height - j * pixelHeight : pixelHeight // Last row height adjustment
+        j === rows - 1 ? canvas!.height - j * pixelHeight : pixelHeight
 
       pixels.push({
         x: i * pixelWidth,
         y: j * pixelHeight,
         width, // Adjust width for the last column
         height, // Adjust height for the last row
-        color: `rgb(${color})`, // Start as black
+        color: `rgb(${color})`, // Use the provided color
         opacity: 1 // Start with full opacity
       })
     }

@@ -24,7 +24,7 @@ const anim_header = async (_ctx: any) => {
         '.menu_button',
         section
       ) as HTMLElement[]
-      const animNav = anim_nav(section)
+      const animNav = anim_nav()
       const lenis = useLenis()?.lenis
 
       gsap.set([nav, hiddenNavBlocks], { display: 'none', autoAlpha: 0 })
@@ -88,7 +88,7 @@ const anim_header = async (_ctx: any) => {
   })
 }
 
-const anim_nav = (section: HTMLElement): GSAPTimeline | undefined => {
+const anim_nav = (): GSAPTimeline | undefined => {
   const tlNavOpen = gsap.timeline({ paused: true, defaults })
   tlNavOpen
     .to(nav, { display: 'block', duration: 0 })

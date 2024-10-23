@@ -3,9 +3,16 @@ import { drawPixels, generatePixelGrid } from '@/animations/pixels'
 import { ScrollTrigger, gsap } from '@gsap'
 
 const name = "[data-section='hero']"
-
+const startTrigger = '.trigger_exit'
+const endTrigger = '.pixel_trigger'
+const splineWrap = '.hero_spline_wrap'
+const names = '.hero_name'
+const title = '.hero_title'
+const defaults: GSAPTweenVars = {
+  ease: ANIM_VAR.ease.out
+}
 const anim_sectionHero = (ctx: any) => {
-  ctx.conditions.desktop && anim_desktop(ctx)
+  ctx.conditions.desktop ? anim_desktop(ctx) : anim_mobile(ctx)
 }
 
 const anim_desktop = (ctx: any) => {
@@ -15,8 +22,26 @@ const anim_desktop = (ctx: any) => {
   gsap.registerPlugin(ScrollTrigger)
 
   sections.forEach((section) => {
-    animation_pixels(section)
-    animation_exit(section, ctx)
+    gsap.context(() => {
+      animation_pixels(section)
+      animation_enter(section, ctx)
+      animation_exit(section, ctx)
+    }, section)
+  })
+}
+
+const anim_mobile = (ctx: any) => {
+  const sections = gsap.utils.toArray(name) as HTMLElement[]
+  if (sections.length === 0) return
+
+  gsap.registerPlugin(ScrollTrigger)
+
+  sections.forEach((section) => {
+    gsap.context(() => {
+      animation_pixels(section)
+      animation_enter(section, ctx)
+      animation_exit(section, ctx)
+    }, section)
   })
 }
 
@@ -42,6 +67,7 @@ const animation_pixels = (section: HTMLElement) => {
       return
     }
     drawPixels({ pixels, context, canvas, color })
+
     // Animate the shuffled pixels using GSAP
     gsap.to(shuffledPixels, {
       stagger: { amount: 1, from: 'random' },
@@ -61,18 +87,27 @@ const animation_pixels = (section: HTMLElement) => {
   })
 }
 
+/* Animation Enter */
+const animation_enter = (_section: HTMLElement, _ctx: any) => {
+  const tl = gsap.timeline({
+    defaults
+  })
+
+  tl.to(['.main-wrapper', splineWrap], { opacity: 1 })
+    .from(names, {
+      opacity: 0,
+      translateZ: -25,
+      scale: 0.5,
+      duration: ANIM_VAR.duration.default / 3,
+      stagger: { each: 0.1, from: 'random' }
+    })
+    .from(title, { translateZ: -120, scale: 1, opacity: 0 }, '<')
+    .from(splineWrap, { translateZ: -100, duration: 1.5, scale: 0.5 }, '>-=0.5')
+}
+
 /* Animatio Exit */
 const animation_exit = (section: HTMLElement, _ctx: any) => {
   gsap.context(() => {
-    const startTrigger = '.trigger_exit'
-    const endTrigger = '.pixel_trigger'
-    const splineWrap = '.hero_spline_wrap'
-    const names = '.hero_name'
-    const title = '.hero_title'
-    const defaults: GSAPTweenVars = {
-      ease: ANIM_VAR.ease.out
-    }
-
     const tl = gsap.timeline({
       defaults,
       scrollTrigger: {
