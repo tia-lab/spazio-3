@@ -1,5 +1,5 @@
 import { ANIM_VAR } from '$/spot.config'
-import { useKeyPress } from '@/hooks'
+import { useKeyPress, useLenis } from '@/hooks'
 import { ScrollTrigger, gsap } from '@gsap'
 
 const name = "[data-section='header']"
@@ -20,9 +20,14 @@ const anim_header = async (_ctx: any) => {
     gsap.context(async () => {
       const nav = '[data-nav]'
       const openButton = section.querySelector("[data-button='open-nav']")
-      gsap.set([nav, hiddenNavBlocks], { display: 'none', autoAlpha: 0 })
-
+      const menuButtons = gsap.utils.toArray(
+        '.menu_button',
+        section
+      ) as HTMLElement[]
       const animNav = anim_nav(section)
+      const lenis = useLenis()?.lenis
+
+      gsap.set([nav, hiddenNavBlocks], { display: 'none', autoAlpha: 0 })
 
       ScrollTrigger.observe({
         target: openButton,
@@ -58,6 +63,27 @@ const anim_header = async (_ctx: any) => {
           }
         }
       })
+
+      menuButtons.forEach((button) => {
+        const anchor = button.dataset.anchor
+        ScrollTrigger.observe({
+          target: button,
+          onClick: () => {
+            if (anchor) {
+              lenis?.scrollTo(anchor, { duration: 0.25 })
+              if (section.dataset.open === 'true') {
+                animNav?.reverse().eventCallback('onReverseComplete', () => {
+                  section.setAttribute('data-open', 'false')
+                  openButton?.classList.remove('is-open')
+                  ScrollTrigger.refresh()
+                })
+              }
+            }
+          }
+        })
+      })
+
+      //Ancjor Links
     }, section)
   })
 }
