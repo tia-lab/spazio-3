@@ -1,0 +1,20 @@
+@use '../../exports.scss' as *;
+
+.header {
+  .menu_open {
+    .logo_block {
+      transition: transform $duration-base $out-cubic;
+    }
+
+    &.is-hover,
+    &.is-open {
+      .logo_block {
+        transform: translateY(-1.5rem);
+
+        &:nth-child(2) {
+          transform: translateY(1.5rem);
+        }
+      }
+    }
+  }
+}

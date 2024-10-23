@@ -96,3 +96,11 @@
   font-weight: 400;
   line-height: 150%; /* 1.3125rem */
 }
+
+@mixin text-menu-btn {
+  @include font-primary;
+  font-size: 10rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%; /* 10rem */
+}

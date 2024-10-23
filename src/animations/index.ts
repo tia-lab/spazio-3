@@ -2,6 +2,7 @@ import { MEDIA } from '$/spot.config'
 import { useGsapMatchMedia } from '@/hooks'
 import { delay } from '@/utils'
 import anim_cursor_hover_default from './cursor/hover-default'
+import anim_header from './header'
 import anim_linkText from './link-text'
 import anim_sectionFooter from './sections/footer'
 import anim_sectionHero from './sections/hero'
@@ -15,6 +16,7 @@ const animations = () => {
   useGsapMatchMedia({
     media: MEDIA,
     callback: async (c) => {
+      await anim_header(c)
       anim_sectionHero(c)
       anim_sectionIntro(c)
       anim_sectionSlider(c)
@@ -23,6 +25,7 @@ const animations = () => {
       anim_sectionFooter(c)
       await delay(500)
       anim_linkText(c)
+
       /*  anim_title(c)
       anim_test(c)
       anim_sectionIntro(c)

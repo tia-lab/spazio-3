@@ -78,7 +78,10 @@ body {
     padding-top: 100%;
   }
 
-  .footer_pixels {
+  .footer_pixels,
+  .hero_pixels,
+  .intro_pixels,
+  .slider_pixels {
     pointer-events: none;
   }
 }
