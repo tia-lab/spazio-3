@@ -1,6 +1,8 @@
 @use '../../exports.scss' as *;
 
 .header {
+  mix-blend-mode: difference;
+
   .menu_open {
     .logo_block {
       transition: transform $duration-base $out-cubic;
@@ -9,10 +11,32 @@
     &.is-hover,
     &.is-open {
       .logo_block {
-        transform: translateY(-1.5rem);
+        &:first-child {
+          transform: translate3d(-0.75rem, -0.75rem, 0);
+        }
 
         &:nth-child(2) {
-          transform: translateY(1.5rem);
+          transform: translateY(0.75rem);
+        }
+
+        &:nth-child(3) {
+          transform: translate3d(0.75rem, -0.75rem, 0);
+        }
+      }
+    }
+
+    &.is-open {
+      .logo_block {
+        &:first-child {
+          transform: translate3d(0, -1.5rem, 0) !important;
+        }
+
+        &:nth-child(2) {
+          transform: translateY(1.5rem) !important;
+        }
+
+        &:nth-child(3) {
+          transform: translate3d(0, -1.5rem, 0) !important;
         }
       }
     }

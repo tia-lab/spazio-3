@@ -4,27 +4,23 @@
   @include desktop {
     .projects_list_item {
       &:nth-child(2) {
-        top: 10.2rem;
+        top: 6.2rem;
       }
 
       &:nth-child(3) {
-        top: 14.4rem;
+        top: 10.4rem;
       }
 
       &:nth-child(4) {
-        top: 18.6rem;
+        top: 14.6rem;
       }
     }
 
     .project {
       &.is-last {
         opacity: 0;
-        height: 10vh;
+        height: 10rem;
       }
     }
-  }
-
-  .portfolio_pixels {
-    pointer-events: none;
   }
 }

@@ -3,7 +3,7 @@ import { useKeyPress, useLenis } from '@/hooks'
 import { ScrollTrigger, gsap } from '@gsap'
 
 const name = "[data-section='header']"
-const nav = '[data-nav]'
+const nav = document.querySelector('[data-nav]') as HTMLElement
 const hiddenNavBlocks = '.logo_block.is-open'
 
 const defaults: GSAPTweenVars = {
@@ -18,7 +18,6 @@ const anim_header = async (_ctx: any) => {
   gsap.registerPlugin(ScrollTrigger)
   sections.forEach((section) => {
     gsap.context(async () => {
-      const nav = '[data-nav]'
       const openButton = section.querySelector("[data-button='open-nav']")
       const menuButtons = gsap.utils.toArray(
         '.menu_button',
