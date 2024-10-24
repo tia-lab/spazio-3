@@ -39,16 +39,17 @@ const animation_pixels = (section: HTMLElement) => {
     }
     drawPixels({ pixels, context, canvas, color })
     // Animate the shuffled pixels using GSAP
-    gsap.to(shuffledPixels, {
-      stagger: { amount: 1, from: 'random' },
+    const tl = gsap.timeline({
       scrollTrigger: {
         trigger: trigger,
         scrub: 1,
         //markers: true,
         start: 'top bottom',
         end: 'top center'
-      },
-
+      }
+    })
+    tl.to(section, { pointerEvents: 'none', duration: 0 }).to(shuffledPixels, {
+      stagger: { amount: 1, from: 'random' },
       opacity: 0, // Fade out pixel opacity
       duration: ANIM_VAR.duration.default / 2, // Use ANIM_VAR for faster fade-out
       onUpdate: () => drawPixels({ pixels, context, canvas, color }), // Redraw pixels every time opacity changes

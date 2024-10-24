@@ -1,8 +1,20 @@
-import { ANIM_VAR } from '$/spot.config'
+import { ANIM_VAR, COLORS } from '$/spot.config'
 import { drawPixels, generatePixelGrid } from '@/animations/pixels'
 import { ScrollTrigger, gsap } from '@gsap'
 
 const name = "[data-section='slider']"
+const startTrigger = '.trigger_enter'
+const exitTrigger = '.trigger_exit'
+const slidesWrap = '.slider_slides'
+const modal = document.querySelector('[data-modal="slider"]') as HTMLElement
+const _modalText = modal.querySelector('[data-modal-content]') as HTMLElement
+const modalTitle = modal.querySelector('[data-modal-title]') as HTMLElement
+const modalClose = modal.querySelector('[data-modal-close]') as HTMLElement
+
+const defaults: gsap.TweenVars = {
+  ease: ANIM_VAR.ease.out,
+  duration: ANIM_VAR.duration.default
+}
 
 const anim_sectionSlider = (ctx: any) => {
   ctx.conditions.desktop && anim_desktop(ctx)
@@ -15,10 +27,48 @@ const anim_desktop = (_ctx: any) => {
   gsap.registerPlugin(ScrollTrigger)
 
   sections.forEach((section) => {
-    animation_pixels(section)
-    //animation_exit(section, ctx)
+    gsap.context(() => {
+      animation_pixels(section)
+      //animation_spline(section)
+      animation_enter(section, _ctx)
+      animation_slides(section, _ctx)
+      animation_exit(section, _ctx)
+      animation_modal(section, _ctx)
+    }, section)
   })
 }
+
+// /* Slider */
+// const animation_spline = (section: HTMLElement) => {
+//   const canvas = section.querySelector(
+//     '.spline_slider_canvas'
+//   ) as HTMLCanvasElement
+//   const spline = new Application(canvas)
+//   spline
+//     .load('https://prod.spline.design/GTXhIoULUPBvh58y/scene.splinecode')
+//     .then(() => {
+//       const obj = spline.findObjectByName('spaziotre') as any
+//       gsap.set(obj.position, { x: -190, y: -21, z: 0 })
+//       gsap.set(obj.rotation, { x: 25, y: 45, z: 0 })
+//       gsap.set(obj.scale, { x: 0.9, y: 0.9, z: 0.9 })
+//       console.log(obj.rotation)
+//       const step2 = gsap.timeline({
+//         toggleActions: 'play reverse play reverse',
+//         scrollTrigger: {
+//           trigger: section,
+//           start: 'center center',
+//           end: 'center center'
+//         }
+//       })
+
+//       step2
+//         .to(obj.position, { x: -80, y: -40, z: 0 })
+//         .to(obj.scale, { x: 1.2, y: 1.2, z: 1.2 }, '<')
+//         .to(obj.rotation, { x: '180' }, '<')
+//       /* .to(obj.rotation, { x: -40, y: -30, z: 0 }, '<')
+//         .to(obj.scale, { x: 1.2, y: 1.2, z: 1.2 }, '<') */
+//     })
+// }
 
 /* Animation Pixels */
 
@@ -61,45 +111,136 @@ const animation_pixels = (section: HTMLElement) => {
   })
 }
 
-/* Animatio Exit */
-const _animation_exit = (section: HTMLElement, _ctx: any) => {
-  gsap.context(() => {
-    const startTrigger = '.trigger_exit'
-    const endTrigger = '.pixel_trigger'
-    const splineWrap = '.hero_spline_wrap'
-    const names = '.hero_name'
-    const title = '.hero_title'
-    const defaults: GSAPTweenVars = {
-      ease: ANIM_VAR.ease.out
+/* Animation Enter */
+const animation_enter = (_section: HTMLElement, _ctx: any) => {
+  gsap.set(slidesWrap, { translateZ: -100, autoAlpha: 0 })
+  const tl = gsap.timeline({
+    defaults,
+    scrollTrigger: {
+      trigger: startTrigger,
+      start: 'top 60%',
+      end: 'top 20%',
+      scrub: true
     }
+  })
+  tl.to(slidesWrap, { translateZ: 0, autoAlpha: 1, duration: 1 })
+}
 
-    const tl = gsap.timeline({
-      defaults,
-      scrollTrigger: {
-        trigger: startTrigger,
-        endTrigger: endTrigger,
-        //markers: true,
-        id: 'exit',
-        scrub: true
+const animation_slides = (section: HTMLElement, _ctx: any) => {
+  const slides = gsap.utils.toArray('.slider_slide', section) as HTMLElement[]
+  const counters = gsap.utils.toArray(
+    '.slider_counter_item',
+    section
+  ) as HTMLElement[]
+  gsap.set(slides.slice(1), { autoAlpha: 0 })
+  gsap.set(counters.slice(1), { backgroundColor: COLORS.neutral600 })
+
+  const tl = gsap.timeline({
+    defaults: { ease: 'none' },
+    scrollTrigger: {
+      trigger: startTrigger,
+      endTrigger: exitTrigger,
+      start: 'top 60%',
+      end: 'bottom bottom',
+      scrub: true,
+      // markers: true,
+      snap: {
+        snapTo: (value) =>
+          Math.round(value * (slides.length - 1)) / (slides.length - 1),
+        duration: 0, // Duration for snapping animation
+        ease: ANIM_VAR.ease.out // Easing for snap behavior
       }
-    })
+    }
+  })
 
-    tl.to(names, {
-      opacity: 0,
-      translateZ: -25,
-      scale: 0.5,
-      duration: ANIM_VAR.duration.default / 3,
-      stagger: { each: 0.1, from: 'random' }
-    })
-      .to(title, { translateZ: 150, scale: 2, opacity: 0 }, '<')
-      .to(
-        splineWrap,
-        { translateZ: '-100px', duration: 1, scale: 0.25 },
-        '>-=0.5'
-      )
+  // Animate each slide one after the other
+  slides.forEach((_slide, i) => {
+    tl.to(
+      slides,
+      {
+        autoAlpha: (index) => (index === i ? 1 : 0),
+        duration: 0.1
+      },
+      i * 0.3
+    ).to(
+      counters,
+      {
+        backgroundColor: (index) =>
+          index === i ? COLORS.neutral100 : COLORS.neutral600,
+        duration: 0.1
+      },
+      i * 0.3
+    )
+  })
+}
 
-      .to(splineWrap, { opacity: 0, delay: 0.2, duration: 0.25 }, '<')
-  }, section)
+/* Animation Exit */
+const animation_exit = (_section: HTMLElement, _ctx: any) => {
+  gsap.set(slidesWrap, { translateZ: -100, autoAlpha: 0 })
+  const tl = gsap.timeline({
+    defaults,
+    scrollTrigger: {
+      trigger: exitTrigger,
+      endTrigger: '.pixel_trigger',
+      start: 'top 60%',
+      end: 'top 20%',
+      scrub: true
+    }
+  })
+  tl.to([slidesWrap, '.slider_counter'], {
+    translateZ: -100,
+    autoAlpha: 0,
+    duration: 1
+  })
+}
+
+const animation_modal = (section: HTMLElement, _ctx: any) => {
+  gsap.set(modal, { autoAlpha: 0, display: 'none' })
+
+  const paths = gsap.utils.toArray('path', modalClose) as HTMLElement[]
+
+  const tlButton = gsap.timeline({
+    paused: true,
+    defaults: { ...defaults, duration: ANIM_VAR.duration.default / 2 }
+  })
+  tlButton
+    .to([paths[0], paths[1]], { yPercent: 100 })
+    .to([paths[2], paths[3]], { yPercent: -100 }, '<')
+    .to([paths[0], paths[2]], { xPercent: 100 })
+    .to([paths[1], paths[3]], { xPercent: -100 }, '<')
+
+  const tl = gsap.timeline({ defaults, paused: true })
+  tl.to(modal, { display: 'block', duration: 0 }).to(modal, { autoAlpha: 1 })
+  const sliders = gsap.utils.toArray('.slider_slide', section) as HTMLElement[]
+  sliders.forEach((slide) => {
+    gsap.context(() => {
+      const button = '.slider_slide_button'
+      const title = slide.querySelector(
+        '.slider_slide_title>.title-display'
+      ) as HTMLElement
+
+      ScrollTrigger.observe({
+        target: button,
+        onClick: () => {
+          modalTitle.innerHTML = title.innerHTML
+          tl.play()
+        }
+      })
+    }, slide)
+  })
+
+  ScrollTrigger.observe({
+    target: modalClose,
+    onHover: () => {
+      tlButton.play()
+    },
+    onHoverEnd: () => {
+      tlButton.reverse()
+    },
+    onClick: () => {
+      tl.reverse()
+    }
+  })
 }
 
 export default anim_sectionSlider
