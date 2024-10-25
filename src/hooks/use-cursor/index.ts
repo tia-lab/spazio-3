@@ -1,5 +1,4 @@
 import { ANIM_VAR, MEDIA, USE } from '$/spot.config'
-import { anim_cursor_hover_default } from '@/animations'
 import { ScrollTrigger, gsap } from '@gsap'
 import useGsapMatchMedia from '../use-gsap/use-gsap-match-media'
 
@@ -39,17 +38,16 @@ const useCursor = () => {
       media: MEDIA.desktop,
       callback(c) {
         if (!c) return
-        const linksDefault = gsap.utils.toArray("[data-anim-cursor='default']")
+        const linksDefault = gsap.utils.toArray('[data-anim-cursor]')
         if (!linksDefault.length) return
         linksDefault.forEach((link: any) => {
-          const tl = anim_cursor_hover_default(cursor)
           ScrollTrigger.observe({
             target: link,
             onHover: () => {
-              tl.play()
+              cursor.classList.add('is-active')
             },
             onHoverEnd: () => {
-              tl.reverse()
+              cursor.classList.remove('is-active')
             }
           })
         })

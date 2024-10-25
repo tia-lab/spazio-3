@@ -1,5 +1,6 @@
 import { ANIM_VAR, COLORS } from '$/spot.config'
 import { drawPixels, generatePixelGrid } from '@/animations/pixels'
+import { useKeyPress } from '@/hooks'
 import { ScrollTrigger, gsap } from '@gsap'
 
 const name = "[data-section='slider']"
@@ -7,7 +8,7 @@ const startTrigger = '.trigger_enter'
 const exitTrigger = '.trigger_exit'
 const slidesWrap = '.slider_slides'
 const modal = document.querySelector('[data-modal="slider"]') as HTMLElement
-const _modalText = modal.querySelector('[data-modal-content]') as HTMLElement
+const modalText = modal.querySelector('[data-modal-content]') as HTMLElement
 const modalTitle = modal.querySelector('[data-modal-title]') as HTMLElement
 const modalClose = modal.querySelector('[data-modal-close]') as HTMLElement
 
@@ -209,6 +210,7 @@ const animation_modal = (section: HTMLElement, _ctx: any) => {
     .to([paths[0], paths[2]], { xPercent: 100 })
     .to([paths[1], paths[3]], { xPercent: -100 }, '<')
 
+  let isOpen = false
   const tl = gsap.timeline({ defaults, paused: true })
   tl.to(modal, { display: 'block', duration: 0 }).to(modal, { autoAlpha: 1 })
   const sliders = gsap.utils.toArray('.slider_slide', section) as HTMLElement[]
@@ -218,12 +220,15 @@ const animation_modal = (section: HTMLElement, _ctx: any) => {
       const title = slide.querySelector(
         '.slider_slide_title>.title-display'
       ) as HTMLElement
-
+      const text = slide.querySelector('.slider_slide_text') as HTMLElement
       ScrollTrigger.observe({
         target: button,
         onClick: () => {
+          if (isOpen) return
           modalTitle.innerHTML = title.innerHTML
+          modalText.innerHTML = text.innerHTML
           tl.play()
+          isOpen = true
         }
       })
     }, slide)
@@ -238,8 +243,19 @@ const animation_modal = (section: HTMLElement, _ctx: any) => {
       tlButton.reverse()
     },
     onClick: () => {
-      tl.reverse()
+      if (!isOpen) return
+      tl.reverse().eventCallback('onReverseComplete', () => {
+        isOpen = false
+      })
     }
+  })
+
+  useKeyPress({
+    key: 'Escape',
+    callback: () =>
+      tl.reverse().eventCallback('onReverseComplete', () => {
+        isOpen = false
+      })
   })
 }
 

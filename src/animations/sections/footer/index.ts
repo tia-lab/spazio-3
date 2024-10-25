@@ -90,7 +90,7 @@ const anim_enter = (section: HTMLElement, ctx: any) => {
       defaults,
       scrollTrigger: {
         trigger: trigger,
-        start: isDesktop ? 'top 80%' : 'top bottom'
+        start: isDesktop ? 'top 80%' : 'top 80%'
       }
     })
     tlHead.from(headItems, {

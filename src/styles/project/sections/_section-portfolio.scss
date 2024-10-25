@@ -1,25 +1,26 @@
 @use '../../exports.scss' as *;
 
 .section_portfolio {
-  @include desktop {
-    .projects_list_item {
-      &:nth-child(2) {
-        top: 6.2rem;
-      }
-
-      &:nth-child(3) {
-        top: 10.4rem;
-      }
-
-      &:nth-child(4) {
-        top: 14.6rem;
-      }
+  .projects_list_item {
+    &:nth-child(2) {
+      top: 6.2rem;
     }
 
-    .project {
-      &.is-last {
-        opacity: 0;
-        height: 10rem;
+    &:nth-child(3) {
+      top: 10.4rem;
+    }
+
+    &:nth-child(4) {
+      top: 14.6rem;
+    }
+  }
+
+  .project {
+    &.is-last {
+      opacity: 0;
+      height: 10rem;
+      @include tablet {
+        height: 17rem;
       }
     }
   }

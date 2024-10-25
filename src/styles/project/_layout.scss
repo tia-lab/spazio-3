@@ -84,4 +84,29 @@ body {
   .slider_pixels {
     pointer-events: none;
   }
+
+  .cursor {
+    mix-blend-mode: difference;
+    pointer-events: none;
+
+    .cursor_block {
+      transition: transform calc($duration-base / 2) $out-cubic;
+    }
+
+    &.is-active {
+      .cursor_block {
+        &:first-child {
+          transform: translateX(-1rem);
+        }
+
+        &:nth-child(2) {
+          transform: translateY(-1rem);
+        }
+
+        &:last-child {
+          transform: translateX(1rem);
+        }
+      }
+    }
+  }
 }

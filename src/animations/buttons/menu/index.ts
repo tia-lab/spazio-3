@@ -41,7 +41,6 @@ const anim_menuButton = async (_ctx: any) => {
       //Counters
       setTimeout(() => {
         if (counter && counter.dataset.count) {
-          console.log('count')
           const items = collectionItemsCount({
             attribute: `[data-count-items="${counter.dataset.count}"]`,
             toString: true
