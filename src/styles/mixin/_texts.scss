@@ -103,6 +103,13 @@
   font-style: normal;
   font-weight: 400;
   line-height: 100%; /* 10rem */
+
+  @include br.mobile {
+    font-size: 5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 100%; /* 5rem */
+  }
 }
 
 @mixin text-menu-counter {
@@ -112,4 +119,11 @@
   font-weight: 400;
   line-height: 100%; /* 2.5rem */
   text-transform: uppercase;
+
+  @include br.mobile {
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 100%; /* 2rem */
+  }
 }

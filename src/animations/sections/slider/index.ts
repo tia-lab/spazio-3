@@ -18,10 +18,6 @@ const defaults: gsap.TweenVars = {
 }
 
 const anim_sectionSlider = (ctx: any) => {
-  ctx.conditions.desktop && anim_desktop(ctx)
-}
-
-const anim_desktop = (_ctx: any) => {
   const sections = gsap.utils.toArray(name) as HTMLElement[]
   if (sections.length === 0) return
 
@@ -31,10 +27,10 @@ const anim_desktop = (_ctx: any) => {
     gsap.context(() => {
       animation_pixels(section)
       //animation_spline(section)
-      animation_enter(section, _ctx)
-      animation_slides(section, _ctx)
-      animation_exit(section, _ctx)
-      animation_modal(section, _ctx)
+      animation_enter(section, ctx)
+      animation_slides(section, ctx)
+      animation_exit(section, ctx)
+      animation_modal(section, ctx)
     }, section)
   })
 }
