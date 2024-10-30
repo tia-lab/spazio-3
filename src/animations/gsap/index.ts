@@ -28,11 +28,11 @@ const SCROLLTRIGGER_DEFAULTS: ScrollTrigger.Vars = {}
 export {
   DrawSVGPlugin,
   Flip,
+  gsap,
   RoughEase,
+  ScrollTrigger,
   SCROLLTRIGGER_CONFIG,
   SCROLLTRIGGER_DEFAULTS,
   SCROLLTRIGGER_NORMALIZE,
-  ScrollTrigger,
-  SplitText,
-  gsap
+  SplitText
 }

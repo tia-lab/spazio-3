@@ -1,7 +1,8 @@
 import { ANIM_VAR, COLORS } from '$/spot.config'
 import { drawPixels, generatePixelGrid } from '@/animations/pixels'
-import { useKeyPress } from '@/hooks'
+import { useKeyPress, useLenis } from '@/hooks'
 import { ScrollTrigger, gsap } from '@gsap'
+import { Application } from '@splinetool/runtime'
 
 const name = "[data-section='slider']"
 const startTrigger = '.trigger_enter'
@@ -11,6 +12,7 @@ const modal = document.querySelector('[data-modal="slider"]') as HTMLElement
 const modalText = modal.querySelector('[data-modal-content]') as HTMLElement
 const modalTitle = modal.querySelector('[data-modal-title]') as HTMLElement
 const modalClose = modal.querySelector('[data-modal-close]') as HTMLElement
+const lenis = useLenis()?.lenis
 
 const defaults: gsap.TweenVars = {
   ease: ANIM_VAR.ease.out,
@@ -35,37 +37,34 @@ const anim_sectionSlider = (ctx: any) => {
   })
 }
 
-// /* Slider */
-// const animation_spline = (section: HTMLElement) => {
-//   const canvas = section.querySelector(
-//     '.spline_slider_canvas'
-//   ) as HTMLCanvasElement
-//   const spline = new Application(canvas)
-//   spline
-//     .load('https://prod.spline.design/GTXhIoULUPBvh58y/scene.splinecode')
-//     .then(() => {
-//       const obj = spline.findObjectByName('spaziotre') as any
-//       gsap.set(obj.position, { x: -190, y: -21, z: 0 })
-//       gsap.set(obj.rotation, { x: 25, y: 45, z: 0 })
-//       gsap.set(obj.scale, { x: 0.9, y: 0.9, z: 0.9 })
-//       console.log(obj.rotation)
-//       const step2 = gsap.timeline({
-//         toggleActions: 'play reverse play reverse',
-//         scrollTrigger: {
-//           trigger: section,
-//           start: 'center center',
-//           end: 'center center'
-//         }
-//       })
-
-//       step2
-//         .to(obj.position, { x: -80, y: -40, z: 0 })
-//         .to(obj.scale, { x: 1.2, y: 1.2, z: 1.2 }, '<')
-//         .to(obj.rotation, { x: '180' }, '<')
-//       /* .to(obj.rotation, { x: -40, y: -30, z: 0 }, '<')
-//         .to(obj.scale, { x: 1.2, y: 1.2, z: 1.2 }, '<') */
-//     })
-// }
+/* Slider */
+const animation_spline = (section: HTMLElement) => {
+  const canvas = section.querySelector(
+    '.spline_slider_canvas'
+  ) as HTMLCanvasElement
+  const spline = new Application(canvas)
+  spline
+    .load('https://prod.spline.design/RUmu5wF6ilMqzSj6/scene.splinecode')
+    .then(() => {
+      const obj = spline.findObjectByName('spaziotre') as any
+      gsap.set(obj.position, { x: 10, y: 0, z: 0 })
+      gsap.set(obj.rotation, { x: 25, y: 45, z: 0 })
+      gsap.set(obj.scale, { x: 0.9, y: 0.9, z: 0.9 })
+      console.log(obj.rotation)
+      const step2 = gsap.timeline({
+        //toggleActions: 'play reverse play reverse',
+        scrollTrigger: {
+          trigger: section,
+          start: 'center center',
+          end: 'center center',
+          scrub: 1
+        }
+      })
+      step2
+        .to(obj.rotation, { x: 20, y: 20 }, '<')
+        .to(obj.scale, { x: 1.2, y: 1.2, z: 1.2 }, '<')
+    })
+}
 
 /* Animation Pixels */
 
@@ -224,6 +223,7 @@ const animation_modal = (section: HTMLElement, _ctx: any) => {
           modalTitle.innerHTML = title.innerHTML
           modalText.innerHTML = text.innerHTML
           tl.play()
+          lenis?.stop()
           isOpen = true
         }
       })
@@ -242,6 +242,7 @@ const animation_modal = (section: HTMLElement, _ctx: any) => {
       if (!isOpen) return
       tl.reverse().eventCallback('onReverseComplete', () => {
         isOpen = false
+        lenis?.start()
       })
     }
   })
@@ -251,6 +252,7 @@ const animation_modal = (section: HTMLElement, _ctx: any) => {
     callback: () =>
       tl.reverse().eventCallback('onReverseComplete', () => {
         isOpen = false
+        lenis?.start()
       })
   })
 }

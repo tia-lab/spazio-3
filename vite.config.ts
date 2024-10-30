@@ -18,6 +18,9 @@ module.exports = defineConfig({
   root: './src',
   base: './',
   envDir: '../',
+  optimizeDeps: {
+    include: ['three', '@splinetool/loader']
+  },
   build: {
     assetsDir: '',
     outDir,
