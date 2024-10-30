@@ -2,7 +2,7 @@ import { ANIM_VAR, COLORS } from '$/spot.config'
 import { drawPixels, generatePixelGrid } from '@/animations/pixels'
 import { useKeyPress, useLenis } from '@/hooks'
 import { ScrollTrigger, gsap } from '@gsap'
-import { Application } from '@splinetool/runtime'
+//import { Application } from '@splinetool/runtime'
 
 const name = "[data-section='slider']"
 const startTrigger = '.trigger_enter'
@@ -38,7 +38,7 @@ const anim_sectionSlider = (ctx: any) => {
 }
 
 /* Slider */
-const animation_spline = (section: HTMLElement) => {
+/* const animation_spline = (section: HTMLElement) => {
   const canvas = section.querySelector(
     '.spline_slider_canvas'
   ) as HTMLCanvasElement
@@ -64,7 +64,7 @@ const animation_spline = (section: HTMLElement) => {
         .to(obj.rotation, { x: 20, y: 20 }, '<')
         .to(obj.scale, { x: 1.2, y: 1.2, z: 1.2 }, '<')
     })
-}
+} */
 
 /* Animation Pixels */
 
