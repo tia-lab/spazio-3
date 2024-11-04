@@ -61,3 +61,11 @@ h5,
 .text-menu-counter {
   @include text-menu-counter;
 }
+
+.rich-text {
+  ul {
+    li {
+      list-style: disc;
+    }
+  }
+}
