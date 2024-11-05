@@ -1,6 +1,7 @@
 @use '../../exports.scss' as *;
 
-.section_hero {
+.section_hero,
+.section_home_hero {
   .main-wrapper {
     mix-blend-mode: difference;
   }

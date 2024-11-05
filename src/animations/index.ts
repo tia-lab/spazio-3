@@ -5,6 +5,7 @@ import anim_buttons from './buttons'
 import anim_cursor_hover_default from './cursor/hover-default'
 import anim_header from './header'
 import anim_linkText from './link-text'
+import anim_sectionFooter from './sections/footer'
 import anim_sectionHero from './sections/hero'
 import anim_sectionIntro from './sections/intro'
 import anim_sectionSlider from './sections/slider'
@@ -30,6 +31,7 @@ const animations = () => {
       anim_sectionSlider(c)
       anim_sectionValues(c)
       anim_sectionTeam(c)
+      anim_sectionFooter(c)
       /* anim_sectionIntro(c)
       anim_sectionSlider(c)
       

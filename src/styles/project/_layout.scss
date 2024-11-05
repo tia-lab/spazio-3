@@ -110,3 +110,7 @@ body {
     }
   }
 }
+
+[data-pixels] {
+  pointer-events: none;
+}
