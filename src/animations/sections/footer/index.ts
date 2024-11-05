@@ -1,7 +1,9 @@
 import { ANIM_VAR } from '$/spot.config'
+import { drawPixels, generatePixelGrid } from '@/animations/pixels'
 import { ScrollTrigger, gsap } from '@gsap'
 
 const name = "[data-section='footer']"
+const pixels = "[data-pixels='footer']"
 
 const anim_sectionFooter = (ctx: any) => {
   const sections = gsap.utils.toArray(name) as HTMLElement[]
@@ -10,7 +12,10 @@ const anim_sectionFooter = (ctx: any) => {
   gsap.registerPlugin(ScrollTrigger)
 
   sections.forEach((section) => {
-    anim_enter(section, ctx)
+    gsap.context(() => {
+      anim_pixels(section)
+      anim_enter(section, ctx)
+    }, section)
   })
 }
 
@@ -46,7 +51,7 @@ const anim_enter = (section: HTMLElement, ctx: any) => {
       defaults,
       scrollTrigger: {
         trigger: logo,
-        start: isDesktop ? 'top 80%' : 'top 80%'
+        start: isDesktop ? 'top bottom' : 'top bottom'
       }
     })
     tlHead.from(headItems, {
@@ -111,4 +116,58 @@ const anim_enter = (section: HTMLElement, ctx: any) => {
         '>'
       )
   }, section)
+}
+
+const anim_pixels = (section: HTMLElement) => {
+  const pixelContainers = Array.from(
+    document.querySelectorAll<HTMLDivElement>(pixels) // Adjust selector if necessary
+  )
+
+  console.log(document.querySelectorAll<HTMLDivElement>(pixels))
+
+  pixelContainers.forEach((container) => {
+    console.log('container', container)
+    // Generate pixels grid for each container
+    const { pixels, shuffledPixels, canvas, context } = generatePixelGrid({
+      container,
+      cols: 25,
+      colorStart: '255,255,255',
+      colorEnd: '230,230,230'
+    })
+
+    if (!canvas || !context || pixels.length === 0) {
+      console.error('Pixel grid generation failed')
+      return
+    }
+
+    drawPixels({ pixels, context, canvas })
+    const animatingPixels = shuffledPixels.filter((pixel) => !pixel.isStatic)
+
+    const tl = gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: 'top bottom',
+          end: 'top 40%',
+
+          id: 'footer',
+          scrub: true,
+          fastScrollEnd: true
+        }
+      })
+      .to(container, { yPercent: -100, duration: 4, ease: 'none' })
+    tl.to(
+      animatingPixels,
+      {
+        stagger: { amount: 2, from: 'random' },
+        colorString: 'rgb(230, 230, 230)', // Animate to black
+        duration: ANIM_VAR.duration.default / 2,
+        onUpdate: () => drawPixels({ pixels, context, canvas }), // Redraw on each update
+        ease: ANIM_VAR.ease.out
+      },
+      '<'
+    )
+      .to('.main-wrapper', { y: '-5vh', duration: 4 }, '<')
+      .from('.main-wrapper', { opacity: 0, duration: 4 }, '<')
+  })
 }

@@ -2,8 +2,11 @@
 
 .header {
   mix-blend-mode: difference;
+  pointer-events: none;
 
   .menu_open {
+    pointer-events: all;
+
     .logo_block {
       transition: transform $duration-base $out-cubic;
     }

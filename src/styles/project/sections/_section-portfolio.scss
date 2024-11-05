@@ -1,26 +1,41 @@
 @use '../../exports.scss' as *;
 
-.section_portfolio {
-  .projects_list_item {
-    &:nth-child(2) {
-      top: 6.2rem;
-    }
-
-    &:nth-child(3) {
-      top: 10.4rem;
-    }
-
-    &:nth-child(4) {
-      top: 14.6rem;
-    }
+.section_home_portfolio {
+  .project_date,
+  .project_open,
+  .project_close {
+    transition:
+      opacity $duration-base $out-cubic,
+      transform $duration-base $out-cubic;
   }
 
-  .project {
-    &.is-last {
+  [data-accordion='item'] {
+    .project_open {
       opacity: 0;
-      height: 10rem;
-      @include tablet {
-        height: 17rem;
+    }
+
+    &:not(.is-active) {
+      [data-accordion='head'] {
+        &:hover {
+          .project_date {
+            opacity: 0;
+            transform: translateX(-1rem);
+          }
+
+          .project_open {
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    &.is-active {
+      .project_date {
+        opacity: 0;
+      }
+
+      .project_close {
+        opacity: 1;
       }
     }
   }
