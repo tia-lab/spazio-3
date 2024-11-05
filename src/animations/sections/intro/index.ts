@@ -45,6 +45,7 @@ const anim_pixels = (section: HTMLElement) => {
     }
 
     drawPixels({ pixels, context, canvas })
+    const animatingPixels = shuffledPixels.filter((pixel) => !pixel.isStatic)
 
     const tl = gsap
       .timeline({
@@ -57,9 +58,9 @@ const anim_pixels = (section: HTMLElement) => {
           fastScrollEnd: true
         }
       })
-      .to(container, { bottom: '-17vh', duration: 4, ease: 'none' })
+      .to(container, { bottom: '-10vh', duration: 4, ease: 'none' })
     tl.to(
-      shuffledPixels,
+      animatingPixels,
       {
         stagger: { amount: 2, from: 'random' },
         colorString: 'rgb(0, 0, 0)', // Animate to black

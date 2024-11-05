@@ -50,7 +50,7 @@ const anim_pixels = (section: HTMLElement) => {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
-        start: 'bottom 80%',
+        start: 'bottom bottom',
         end: 'bottom top',
         markers: true,
         scrub: true,
@@ -58,17 +58,24 @@ const anim_pixels = (section: HTMLElement) => {
       }
     })
 
-    tl.to(container, { bottom: '-10vh', ease: 'none', duration: 4 }).to(
-      animatingPixels,
-      {
-        stagger: { amount: 2, from: 'random' },
-        colorString: 'rgb(255, 255, 255)', // Animate to white
-        duration: ANIM_VAR.duration.default / 2,
-        onUpdate: () => drawPixels({ pixels, context, canvas }), // Redraw on each update
-        ease: ANIM_VAR.ease.out
-      },
-      '<'
-    )
+    tl.to(container, { bottom: '-10vh', ease: 'none', duration: 4 })
+      .to(
+        animatingPixels,
+        {
+          stagger: { amount: 2, from: 'random' },
+          colorString: 'rgb(255, 255, 255)', // Animate to white
+          duration: ANIM_VAR.duration.default / 2,
+          onUpdate: () => drawPixels({ pixels, context, canvas }), // Redraw on each update
+          ease: ANIM_VAR.ease.out
+        },
+        '<'
+      )
+      .to('.main-wrapper', { y: '-10vh', duration: 4 }, '<')
+      .to(
+        '.hero_spline_wrap',
+        { y: '-10vh', duration: 4, translateZ: -100 },
+        '<'
+      )
   })
 }
 

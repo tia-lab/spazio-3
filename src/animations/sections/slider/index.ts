@@ -35,8 +35,8 @@ const anim_pixels = (section: HTMLElement) => {
     const { pixels, shuffledPixels, canvas, context } = generatePixelGrid({
       container,
       cols: 25,
-      colorStart: '0,0,0',
-      colorEnd: '255,255,255'
+      colorStart: '0,0,0', // Starting color (e.g., black)
+      colorEnd: '255,255,255' // Ending color (e.g., white)
     })
 
     if (!canvas || !context || pixels.length === 0) {
@@ -45,21 +45,21 @@ const anim_pixels = (section: HTMLElement) => {
     }
 
     drawPixels({ pixels, context, canvas })
+    const animatingPixels = shuffledPixels.filter((pixel) => !pixel.isStatic)
 
-    const tl = gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: 'bottom bottom',
-          end: 'bottom center',
-          markers: true,
-          scrub: true,
-          fastScrollEnd: true
-        }
-      })
-      .to(container, { bottom: '-10vh', duration: 4, ease: 'none' })
-    tl.to(
-      shuffledPixels,
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: 'bottom bottom',
+        end: 'bottom top',
+        markers: true,
+        scrub: true,
+        fastScrollEnd: true
+      }
+    })
+
+    tl.to(container, { bottom: '-10vh', ease: 'none', duration: 4 }).to(
+      animatingPixels,
       {
         stagger: { amount: 2, from: 'random' },
         colorString: 'rgb(255, 255, 255)', // Animate to white
