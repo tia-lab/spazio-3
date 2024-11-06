@@ -49,7 +49,7 @@ const anim_slider = async (section: HTMLElement) => {
 
   spline
     .load('https://prod.spline.design/qqDCMoeVS30S5rzI/scene.splinecode')
-    .then(async () => {
+    .then(() => {
       const obj = spline.findObjectByName('spaziotre') as any
       gsap.set(obj.position, { x: 10, y: 0, z: 0 })
       gsap.set(obj.rotation, {

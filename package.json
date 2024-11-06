@@ -17,7 +17,7 @@
     "@barba/core": "^2.9.7",
     "@splidejs/splide": "^4.1.4",
     "@splinetool/loader": "^1.9.30",
-    "@splinetool/runtime": "^1.9.35",
+    "@splinetool/runtime": "^1.9.36",
     "@studio-freight/lenis": "^1.0.42",
     "@types/alpinejs": "^3.13.10",
     "@types/three": "^0.169.0",

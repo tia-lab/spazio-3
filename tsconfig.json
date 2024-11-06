@@ -13,6 +13,7 @@
     "moduleResolution": "Node",
     "strict": true,
     "sourceMap": true,
+    "skipLibCheck": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "noEmit": true,
