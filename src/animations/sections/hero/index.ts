@@ -1,6 +1,7 @@
 import { ANIM_VAR } from '$/spot.config'
 import { drawPixels, generatePixelGrid } from '@/animations/pixels'
 import { ScrollTrigger, gsap } from '@gsap'
+import { Application } from '@splinetool/runtime'
 
 const name = "[data-section='hero']"
 const pixels = "[data-pixels='hero']"
@@ -17,18 +18,18 @@ const anim_sectionHero = (_ctx: any) => {
 
   sections.forEach((section) => {
     gsap.context(() => {
-      anim_pixels(section)
+      anim_pixels(section, _ctx)
+      anim_spline(section)
     }, section)
   })
 }
 
-const anim_pixels = (section: HTMLElement) => {
+const anim_pixels = (section: HTMLElement, ctx: any) => {
   const pixelContainers = Array.from(
     document.querySelectorAll<HTMLDivElement>(pixels) // Adjust selector if necessary
   )
 
   pixelContainers.forEach((container) => {
-    console.log('container', container)
     // Generate pixels grid for each container
     const { pixels, shuffledPixels, canvas, context } = generatePixelGrid({
       container,
@@ -50,7 +51,6 @@ const anim_pixels = (section: HTMLElement) => {
         trigger: section,
         start: 'bottom bottom',
         end: 'bottom top',
-        markers: true,
         scrub: true,
         fastScrollEnd: true
       }
@@ -71,10 +71,23 @@ const anim_pixels = (section: HTMLElement) => {
       .to('.main-wrapper', { y: '-10vh', duration: 4 }, '<')
       .to(
         '.hero_spline_wrap',
-        { y: '-10vh', duration: 4, translateZ: -100 },
+        {
+          y: '-10vh',
+          duration: 4,
+          translateZ: ctx.conditions.desktop ? -100 : 0
+        },
         '<'
       )
   })
+}
+
+const anim_spline = (section: HTMLElement) => {
+  const canvas = section.querySelector(
+    '.hero_spline_canvas'
+  ) as HTMLCanvasElement
+  if (!canvas) return
+  const spline = new Application(canvas)
+  spline.load('https://prod.spline.design/UqfiCdSpV0iHdj2b/scene.splinecode')
 }
 
 export default anim_sectionHero

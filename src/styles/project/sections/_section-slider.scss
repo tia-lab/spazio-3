@@ -1,1 +1,11 @@
 @use '../../exports.scss' as *;
+
+.section_home_slider {
+  .swiper-slide {
+    display: flex !important;
+  }
+
+  .main-wrapper {
+    mix-blend-mode: difference;
+  }
+}

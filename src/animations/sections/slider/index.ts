@@ -3,6 +3,7 @@ import { drawPixels, generatePixelGrid } from '@/animations/pixels'
 import { useKeyPress } from '@/hooks'
 import lenis from '@/hooks/use-lenis'
 import { ScrollTrigger, gsap } from '@gsap'
+import { Application } from '@splinetool/runtime'
 import Swiper from 'swiper'
 
 const name = "[data-section='slider']"
@@ -23,28 +24,119 @@ const anim_sectionSlider = (_ctx: any) => {
 
   sections.forEach((section) => {
     gsap.context(() => {
-      anim_pixels(section)
+      anim_pixels(section, _ctx)
       anim_slider(section)
       anim_modal(section, _ctx)
     }, section)
   })
 }
+const anim_slider = async (section: HTMLElement) => {
+  const canvas = section.querySelector(
+    '.spline_slider_canvas'
+  ) as HTMLCanvasElement
+  if (!canvas) return
 
-const anim_slider = (section: HTMLElement) => {
-  const swiper = new Swiper('.swiper-container', {
-    slidesPerView: 1,
-    spaceBetween: 0
-  })
-  console.log('section', swiper)
+  const spline = new Application(canvas)
+  const toRadians = (degrees: number) => degrees * (Math.PI / 180)
+
+  // Move pagination into swiper wrapper
+  const pagination = section.querySelector('.swiper-pagination') as HTMLElement
+  const swiperContainer = section.querySelector(
+    '.swiper-container'
+  ) as HTMLElement
+
+  swiperContainer.appendChild(pagination)
+
+  spline
+    .load('https://prod.spline.design/qqDCMoeVS30S5rzI/scene.splinecode')
+    .then(async () => {
+      const obj = spline.findObjectByName('spaziotre') as any
+      gsap.set(obj.position, { x: 10, y: 0, z: 0 })
+      gsap.set(obj.rotation, {
+        x: toRadians(25),
+        y: toRadians(45),
+        z: toRadians(0)
+      })
+      gsap.set(obj.scale, { x: 0.9, y: 0.9, z: 0.9 })
+
+      const animDeafults: GSAPTweenVars = {
+        duration: ANIM_VAR.duration.default,
+        ease: ANIM_VAR.ease.out
+      }
+
+      // Wait for pagination to be appended before initializing Swiper
+      if (pagination) {
+        const swiper = new Swiper('.swiper-container', {
+          slidesPerView: 1,
+
+          spaceBetween: 0,
+          pagination: {
+            dynamicBullets: true,
+            dynamicMainBullets: 5,
+            el: '.swiper-pagination'
+          },
+          on: {
+            slideChange: () => {
+              switch (swiper.activeIndex) {
+                case 0:
+                  gsap.to(obj.position, { x: 10, y: 0, z: 0, ...animDeafults })
+                  gsap.to(obj.rotation, {
+                    x: toRadians(25),
+                    y: toRadians(45),
+                    z: toRadians(0),
+                    ...animDeafults
+                  })
+                  gsap.to(obj.scale, {
+                    x: 0.9,
+                    y: 0.9,
+                    z: 0.9,
+                    ...animDeafults
+                  })
+                  break
+                case 1:
+                  gsap.to(obj.position, { x: 10, y: 0, z: 0, ...animDeafults })
+                  gsap.to(obj.rotation, {
+                    x: toRadians(-40),
+                    y: toRadians(-30),
+                    z: toRadians(0),
+                    ...animDeafults
+                  })
+                  gsap.to(obj.scale, {
+                    x: 1.2,
+                    y: 1.2,
+                    z: 1.2,
+                    ...animDeafults
+                  })
+                  break
+                case 2:
+                  gsap.to(obj.position, { x: -9, y: 10, z: 0, ...animDeafults })
+                  gsap.to(obj.rotation, {
+                    x: toRadians(-10),
+                    y: toRadians(-130),
+                    z: toRadians(0),
+                    ...animDeafults
+                  })
+                  gsap.to(obj.scale, {
+                    x: 0.9,
+                    y: 0.9,
+                    z: 0.9,
+                    ...animDeafults
+                  })
+                  break
+              }
+            }
+          }
+        })
+      }
+    })
 }
 
-const anim_pixels = (section: HTMLElement) => {
+const anim_pixels = (section: HTMLElement, ctx: any) => {
   const pixelContainers = Array.from(
     document.querySelectorAll<HTMLDivElement>(pixels) // Adjust selector if necessary
   )
 
   pixelContainers.forEach((container) => {
-    console.log('container', container)
     // Generate pixels grid for each container
     const { pixels, shuffledPixels, canvas, context } = generatePixelGrid({
       container,
@@ -66,23 +158,33 @@ const anim_pixels = (section: HTMLElement) => {
         trigger: section,
         start: 'bottom bottom',
         end: 'bottom top',
-        markers: true,
         scrub: true,
         fastScrollEnd: true
       }
     })
 
-    tl.to(container, { bottom: '-10vh', ease: 'none', duration: 4 }).to(
-      animatingPixels,
-      {
-        stagger: { amount: 2, from: 'random' },
-        colorString: 'rgb(255, 255, 255)', // Animate to white
-        duration: ANIM_VAR.duration.default / 2,
-        onUpdate: () => drawPixels({ pixels, context, canvas }), // Redraw on each update
-        ease: ANIM_VAR.ease.out
-      },
-      '<'
-    )
+    tl.to(container, { bottom: '-10vh', ease: 'none', duration: 4 })
+      .to(
+        animatingPixels,
+        {
+          stagger: { amount: 2, from: 'random' },
+          colorString: 'rgb(255, 255, 255)', // Animate to white
+          duration: ANIM_VAR.duration.default / 2,
+          onUpdate: () => drawPixels({ pixels, context, canvas }), // Redraw on each update
+          ease: ANIM_VAR.ease.out
+        },
+        '<'
+      )
+      .to('.main-wrapper', { y: '-10vh', duration: 4 }, '<')
+      .to(
+        '.home_slider_spline',
+        {
+          y: '-50vh',
+          duration: 4,
+          translateZ: ctx.conditions.desktop ? 100 : 0
+        },
+        '<'
+      )
   })
 }
 
@@ -104,7 +206,8 @@ const anim_modal = (section: HTMLElement, _ctx: any) => {
   let isOpen = false
   const tl = gsap.timeline({ defaults, paused: true })
   tl.to(modal, { display: 'block', duration: 0 }).to(modal, { autoAlpha: 1 })
-  const sliders = gsap.utils.toArray('.slider_slide', section) as HTMLElement[]
+  const sliders = gsap.utils.toArray('.swiper-slide', section) as HTMLElement[]
+
   sliders.forEach((slide) => {
     gsap.context(() => {
       const button = '.slider_slide_button'
@@ -115,6 +218,7 @@ const anim_modal = (section: HTMLElement, _ctx: any) => {
       ScrollTrigger.observe({
         target: button,
         onClick: () => {
+          console.log('button', button)
           if (isOpen) return
           modalTitle.innerHTML = title.innerHTML
           modalText.innerHTML = text.innerHTML

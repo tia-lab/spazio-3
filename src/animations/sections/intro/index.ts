@@ -28,7 +28,6 @@ const anim_pixels = (section: HTMLElement) => {
   )
 
   pixelContainers.forEach((container) => {
-    console.log('container', container)
     // Generate pixels grid for each container
     const { pixels, shuffledPixels, canvas, context } = generatePixelGrid({
       container,
@@ -51,7 +50,6 @@ const anim_pixels = (section: HTMLElement) => {
           trigger: section,
           start: 'bottom bottom',
           end: 'bottom top',
-          markers: true,
           scrub: true,
           fastScrollEnd: true
         }

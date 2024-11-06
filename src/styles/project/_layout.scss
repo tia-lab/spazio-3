@@ -90,7 +90,13 @@ body {
     pointer-events: none;
 
     .cursor_block {
-      transition: transform calc($duration-base / 2) $out-cubic;
+      transition:
+        transform calc($duration-base / 2) $out-cubic,
+        opacity calc($duration-base / 2) $out-cubic;
+    }
+
+    .cursor_slider {
+      transition: opacity calc($duration-base / 2) $out-cubic;
     }
 
     &.is-active {
@@ -106,6 +112,12 @@ body {
         &:last-child {
           transform: translateX(1rem);
         }
+      }
+    }
+
+    &.is-slider {
+      .cursor_slider {
+        opacity: 1;
       }
     }
   }

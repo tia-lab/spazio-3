@@ -9,11 +9,43 @@
       transform $duration-base $out-cubic;
   }
 
+  @include tablet {
+    .project_open {
+      opacity: 1 !important;
+    }
+  }
+
   [data-accordion='item'] {
     &.is-active {
       [data-accordion='head'] {
         pointer-events: none;
       }
+      @include tablet {
+        .project_open {
+          transform: rotate(45deg);
+        }
+      }
+    }
+
+    [data-project='head'] {
+      &:hover {
+        .project_date {
+          opacity: 0;
+        }
+
+        .project_open {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  @include desktop {
+    @include portrait {
+      margin-bottom: 20rem;
+    }
+    @include square {
+      margin-bottom: 10rem;
     }
   }
 }

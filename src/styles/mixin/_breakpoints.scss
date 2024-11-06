@@ -33,3 +33,21 @@ $mobile: 640px;
     @content;
   }
 }
+
+@mixin landscape {
+  @media (orientation: landscape) {
+    @content;
+  }
+}
+
+@mixin portrait {
+  @media (orientation: portrait) {
+    @content;
+  }
+}
+
+@mixin square {
+  @media (aspect-ratio: 1/1) {
+    @content;
+  }
+}

@@ -124,7 +124,6 @@ const anim_pixels = (section: HTMLElement) => {
   )
 
   pixelContainers.forEach((container) => {
-    console.log('container', container)
     // Generate pixels grid for each container
     const { pixels, shuffledPixels, canvas, context } = generatePixelGrid({
       container,

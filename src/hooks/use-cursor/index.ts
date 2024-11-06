@@ -39,6 +39,7 @@ const useCursor = () => {
       callback(c) {
         if (!c) return
         const linksDefault = gsap.utils.toArray('[data-anim-cursor]')
+        const linksSlider = gsap.utils.toArray('[data-anim-cursor-slider]')
         if (!linksDefault.length) return
         linksDefault.forEach((link: any) => {
           ScrollTrigger.observe({
@@ -48,6 +49,17 @@ const useCursor = () => {
             },
             onHoverEnd: () => {
               cursor.classList.remove('is-active')
+            }
+          })
+        })
+        linksSlider.forEach((link: any) => {
+          ScrollTrigger.observe({
+            target: link,
+            onHover: () => {
+              cursor.classList.add('is-slider')
+            },
+            onHoverEnd: () => {
+              cursor.classList.remove('is-slider')
             }
           })
         })

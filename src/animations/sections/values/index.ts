@@ -17,7 +17,6 @@ const anim_sectionValues = (ctx: any) => {
 
       const masterTimeline = gsap.timeline({
         scrollTrigger: {
-          markers: true,
           trigger: section,
           start: 'top bottom',
           end: 'bottom bottom',
