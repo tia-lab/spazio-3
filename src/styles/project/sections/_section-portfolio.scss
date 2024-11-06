@@ -8,4 +8,12 @@
       opacity $duration-base $out-cubic,
       transform $duration-base $out-cubic;
   }
+
+  [data-accordion='item'] {
+    &.is-active {
+      [data-accordion='head'] {
+        pointer-events: none;
+      }
+    }
+  }
 }

@@ -43,9 +43,12 @@ const anim_accordion = (_ctx: any, section: HTMLElement) => {
   items.forEach((item, i) => {
     const head = item.querySelector("[data-accordion='head']")
     const body = item.querySelector("[data-accordion='body']")
-
+    const date = item.querySelector('.project_date')
+    const open = item.querySelector('.project_open')
     if (i == 0) {
       gsap.set(body, { height: 'auto', overflow: 'visible' })
+      gsap.set(date, { opacity: 0 })
+      gsap.set(open, { opacity: 1 })
       item.classList.add('is-active')
     }
 
@@ -53,33 +56,50 @@ const anim_accordion = (_ctx: any, section: HTMLElement) => {
       target: head,
       onClick: () => {
         const isActive = item.classList.contains('is-active')
-
+        const tl = gsap.timeline({ defaults })
+        const tlReverse = gsap.timeline({ defaults })
         !isActive &&
-          gsap.to(body, {
-            height: 'auto',
-            //overflow: 'visible',
-            ...defaults,
-            onComplete: () => {
-              item.classList.add('is-active')
-              lenis?.scrollTo(item, { offset: -200 })
+          tl
+            .to(body, {
+              height: 'auto',
+              onComplete: () => {
+                item.classList.add('is-active')
+                lenis?.scrollTo(item, { offset: -200 })
+              }
+            })
+            .to(date, { opacity: 0 }, '<')
+            .to(open, { opacity: 1 }, '>-=0.25')
+        tlReverse
+          .to(
+            items
+              .filter((el) => el !== item)
+              .map((el) => el.querySelector("[data-accordion='body']")),
+            {
+              height: 0,
+              overflow: 'hidden',
+              ...defaults,
+              onComplete: () => {
+                ScrollTrigger.refresh()
+                items
+                  .filter((el) => el !== item)
+                  .map((el) => el.classList.remove('is-active'))
+              }
             }
-          })
-        gsap.to(
-          items
-            .filter((el) => el !== item)
-            .map((el) => el.querySelector("[data-accordion='body']")),
-          {
-            height: 0,
-            overflow: 'hidden',
-            ...defaults,
-            onComplete: () => {
-              ScrollTrigger.refresh()
-              items
-                .filter((el) => el !== item)
-                .map((el) => el.classList.remove('is-active'))
-            }
-          }
-        )
+          )
+          .to(
+            items
+              .filter((el) => el !== item)
+              .map((el) => el.querySelector('.project_open')),
+            { opacity: 0 },
+            '<'
+          )
+          .to(
+            items
+              .filter((el) => el !== item)
+              .map((el) => el.querySelector('.project_date')),
+            { opacity: 1 },
+            '>-=0.25'
+          )
 
         item.classList.toggle('is-active')
       }
