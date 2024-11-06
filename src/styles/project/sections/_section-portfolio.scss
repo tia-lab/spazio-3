@@ -8,35 +8,4 @@
       opacity $duration-base $out-cubic,
       transform $duration-base $out-cubic;
   }
-
-  [data-accordion='item'] {
-    .project_open {
-      opacity: 0;
-    }
-
-    &:not(.is-active) {
-      [data-accordion='head'] {
-        &:hover {
-          .project_date {
-            opacity: 0;
-            transform: translateX(-1rem);
-          }
-
-          .project_open {
-            opacity: 1;
-          }
-        }
-      }
-    }
-
-    &.is-active {
-      .project_date {
-        opacity: 0;
-      }
-
-      .project_close {
-        opacity: 1;
-      }
-    }
-  }
 }
