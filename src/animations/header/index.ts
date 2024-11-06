@@ -1,5 +1,6 @@
 import { ANIM_VAR } from '$/spot.config'
-import { useKeyPress, useLenis } from '@/hooks'
+import { useKeyPress } from '@/hooks'
+import lenis from '@/hooks/use-lenis'
 import { ScrollTrigger, gsap } from '@gsap'
 
 const name = "[data-section='header']"
@@ -24,7 +25,6 @@ const anim_header = async (_ctx: any) => {
         nav
       ) as HTMLElement[]
       const animNav = anim_nav()
-      const lenis = useLenis()?.lenis
 
       gsap.set([nav, hiddenNavBlocks], { display: 'none', autoAlpha: 0 })
 

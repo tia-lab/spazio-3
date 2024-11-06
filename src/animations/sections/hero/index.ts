@@ -27,8 +27,6 @@ const anim_pixels = (section: HTMLElement) => {
     document.querySelectorAll<HTMLDivElement>(pixels) // Adjust selector if necessary
   )
 
-  console.log(document.querySelectorAll<HTMLDivElement>(pixels))
-
   pixelContainers.forEach((container) => {
     console.log('container', container)
     // Generate pixels grid for each container

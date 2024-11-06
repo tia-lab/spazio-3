@@ -1,5 +1,5 @@
 import { ANIM_VAR } from '$/spot.config'
-import { useLenis } from '@/hooks'
+import lenis from '@/hooks/use-lenis'
 import { ScrollTrigger, gsap } from '@gsap'
 
 const name = "[data-section='portfolio']"
@@ -33,7 +33,7 @@ const anim_sectionPortfolio = (ctx: any) => {
 export default anim_sectionPortfolio
 
 const anim_accordion = (_ctx: any, section: HTMLElement) => {
-  const lenis = useLenis()?.lenis
+  //const lenis = useLenis()?.lenis
 
   const items = gsap.utils.toArray(
     "[data-accordion='item']",

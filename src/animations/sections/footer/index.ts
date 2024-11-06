@@ -123,8 +123,6 @@ const anim_pixels = (section: HTMLElement) => {
     document.querySelectorAll<HTMLDivElement>(pixels) // Adjust selector if necessary
   )
 
-  console.log(document.querySelectorAll<HTMLDivElement>(pixels))
-
   pixelContainers.forEach((container) => {
     console.log('container', container)
     // Generate pixels grid for each container
@@ -142,12 +140,14 @@ const anim_pixels = (section: HTMLElement) => {
 
     drawPixels({ pixels, context, canvas })
     const animatingPixels = shuffledPixels.filter((pixel) => !pixel.isStatic)
+    const staticPixels = shuffledPixels.filter((pixel) => pixel.isStatic)
+    gsap.set(staticPixels, { opacity: 0 })
 
     const tl = gsap
       .timeline({
         scrollTrigger: {
           trigger: section,
-          start: 'top bottom',
+          start: 'top 120%',
           end: 'top 40%',
 
           id: 'footer',
@@ -155,7 +155,7 @@ const anim_pixels = (section: HTMLElement) => {
           fastScrollEnd: true
         }
       })
-      .to(container, { yPercent: -100, duration: 4, ease: 'none' })
+      .to(container, { yPercent: -70, duration: 4, ease: 'none' })
     tl.to(
       animatingPixels,
       {
