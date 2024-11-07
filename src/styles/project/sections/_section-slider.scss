@@ -8,4 +8,26 @@
   .main-wrapper {
     mix-blend-mode: difference;
   }
+
+  .slide_button {
+    cursor: pointer;
+
+    &.disabled {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
+  .pagination_bullet {
+    width: 0.5rem;
+    height: 0.5rem;
+    border: 1px solid $neutral-100;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color $duration-base $out-cubic;
+  }
+
+  .pagination_bullet.active {
+    background-color: $neutral-100;
+  }
 }

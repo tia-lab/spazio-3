@@ -8,7 +8,10 @@ export const colorsVars = {
   neutral300: '#E6E6E6',
   neutral400: '#737373',
   neutral500: '#2c2c2c',
-  neutral600: '#000000'
+  neutral600: '#000000',
+  alpha: {
+    medium: 'rgb(0 0 0 / 60%)'
+  }
 }
 
 export const colors: SCSSVars = [

@@ -30,6 +30,7 @@ const anim_sectionSlider = (_ctx: any) => {
     }, section)
   })
 }
+
 const anim_slider = async (section: HTMLElement) => {
   const canvas = section.querySelector(
     '.spline_slider_canvas'
@@ -38,14 +39,6 @@ const anim_slider = async (section: HTMLElement) => {
 
   const spline = new Application(canvas)
   const toRadians = (degrees: number) => degrees * (Math.PI / 180)
-
-  // Move pagination into swiper wrapper
-  const pagination = section.querySelector('.swiper-pagination') as HTMLElement
-  const swiperContainer = section.querySelector(
-    '.swiper-container'
-  ) as HTMLElement
-
-  swiperContainer.appendChild(pagination)
 
   spline
     .load('https://prod.spline.design/qqDCMoeVS30S5rzI/scene.splinecode')
@@ -64,70 +57,124 @@ const anim_slider = async (section: HTMLElement) => {
         ease: ANIM_VAR.ease.out
       }
 
-      // Wait for pagination to be appended before initializing Swiper
-      if (pagination) {
-        const swiper = new Swiper('.swiper-container', {
-          slidesPerView: 1,
+      const swiper = new Swiper('.swiper-container', {
+        slidesPerView: 1,
+        direction: 'vertical',
+        spaceBetween: 0,
+        navigation: false,
+        pagination: false
+      })
 
-          spaceBetween: 0,
-          pagination: {
-            dynamicBullets: true,
-            dynamicMainBullets: 5,
-            el: '.swiper-pagination'
-          },
-          on: {
-            slideChange: () => {
-              switch (swiper.activeIndex) {
-                case 0:
-                  gsap.to(obj.position, { x: 10, y: 0, z: 0, ...animDeafults })
-                  gsap.to(obj.rotation, {
-                    x: toRadians(25),
-                    y: toRadians(45),
-                    z: toRadians(0),
-                    ...animDeafults
-                  })
-                  gsap.to(obj.scale, {
-                    x: 0.9,
-                    y: 0.9,
-                    z: 0.9,
-                    ...animDeafults
-                  })
-                  break
-                case 1:
-                  gsap.to(obj.position, { x: 10, y: 0, z: 0, ...animDeafults })
-                  gsap.to(obj.rotation, {
-                    x: toRadians(-40),
-                    y: toRadians(-30),
-                    z: toRadians(0),
-                    ...animDeafults
-                  })
-                  gsap.to(obj.scale, {
-                    x: 1.2,
-                    y: 1.2,
-                    z: 1.2,
-                    ...animDeafults
-                  })
-                  break
-                case 2:
-                  gsap.to(obj.position, { x: -9, y: 10, z: 0, ...animDeafults })
-                  gsap.to(obj.rotation, {
-                    x: toRadians(-10),
-                    y: toRadians(-130),
-                    z: toRadians(0),
-                    ...animDeafults
-                  })
-                  gsap.to(obj.scale, {
-                    x: 0.9,
-                    y: 0.9,
-                    z: 0.9,
-                    ...animDeafults
-                  })
-                  break
-              }
-            }
-          }
+      // Add custom navigation
+      const nextButton = section.querySelector(
+        '.slide_button_next'
+      ) as HTMLElement
+      const prevButton = section.querySelector(
+        '.slide_button_prev'
+      ) as HTMLElement
+
+      if (nextButton && prevButton) {
+        const updateButtonState = () => {
+          prevButton.classList.toggle('disabled', swiper.isBeginning)
+          nextButton.classList.toggle('disabled', swiper.isEnd)
+        }
+
+        updateButtonState()
+
+        nextButton.addEventListener('click', () => {
+          swiper.slideNext()
+          updateButtonState()
+        })
+        prevButton.addEventListener('click', () => {
+          swiper.slidePrev()
+          updateButtonState()
+        })
+
+        swiper.on('slideChange', updateButtonState)
+      }
+
+      // Custom pagination bullets
+      const paginationContainer = section.querySelector(
+        '.slide_pagination'
+      ) as HTMLElement
+      if (paginationContainer) {
+        paginationContainer.innerHTML = '' // Clear existing bullets
+
+        // Create pagination bullets
+        swiper.slides.forEach((_, index) => {
+          const bullet = document.createElement('div')
+          bullet.classList.add('pagination_bullet')
+
+          // Add click event to bullet
+          bullet.addEventListener('click', () => {
+            swiper.slideTo(index) // Navigate to the clicked bullet's slide
+          })
+
+          paginationContainer.appendChild(bullet)
         })
       }
+
+      // Function to update pagination bullets
+      const updatePagination = () => {
+        const bullets =
+          paginationContainer.querySelectorAll('.pagination_bullet')
+        bullets.forEach((bullet, index) => {
+          bullet.classList.toggle('active', index === swiper.activeIndex)
+        })
+      }
+
+      updatePagination() // Initial pagination state
+      swiper.on('slideChange', updatePagination) // Update on slide change
+
+      swiper.on('slideChange', () => {
+        switch (swiper.activeIndex) {
+          case 0:
+            gsap.to(obj.position, { x: 10, y: 0, z: 0, ...animDeafults })
+            gsap.to(obj.rotation, {
+              x: toRadians(25),
+              y: toRadians(45),
+              z: toRadians(0),
+              ...animDeafults
+            })
+            gsap.to(obj.scale, {
+              x: 0.9,
+              y: 0.9,
+              z: 0.9,
+              ...animDeafults
+            })
+            break
+          case 1:
+            gsap.to(obj.position, { x: 10, y: 0, z: 0, ...animDeafults })
+            gsap.to(obj.rotation, {
+              x: toRadians(-40),
+              y: toRadians(-30),
+              z: toRadians(0),
+              ...animDeafults
+            })
+            gsap.to(obj.scale, {
+              x: 1.2,
+              y: 1.2,
+              z: 1.2,
+              ...animDeafults
+            })
+            break
+          case 2:
+            gsap.to(obj.position, { x: -9, y: 10, z: 0, ...animDeafults })
+            gsap.to(obj.rotation, {
+              x: toRadians(-10),
+              y: toRadians(-130),
+              z: toRadians(0),
+              ...animDeafults
+            })
+            gsap.to(obj.scale, {
+              x: 0.9,
+              y: 0.9,
+              z: 0.9,
+              ...animDeafults
+            })
+            break
+        }
+      })
     })
 }
 
@@ -177,11 +224,11 @@ const anim_pixels = (section: HTMLElement, ctx: any) => {
       )
       .to('.main-wrapper', { y: '-10vh', duration: 4 }, '<')
       .to(
-        '.home_slider_spline',
+        '.home_slider_spline, .slider_commands',
         {
           y: '-50vh',
           duration: 4,
-          translateZ: ctx.conditions.desktop ? 100 : 0
+          translateZ: ctx.conditions.desktop ? -100 : 0
         },
         '<'
       )
