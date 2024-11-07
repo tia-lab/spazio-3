@@ -24,7 +24,6 @@ const animations = () => {
         await delay(4000)
         animation_hero_enter()
       }
-
       anim_header(c)
       anim_sectionHero(c)
       anim_sectionIntro(c)
@@ -32,7 +31,6 @@ const animations = () => {
       anim_sectionValues(c)
       anim_sectionPortfolio(c)
       anim_sectionFooter(c)
-
       await delay(500)
       anim_linkText(c)
       anim_buttons(c)
