@@ -6,7 +6,7 @@ import anim_cursor_hover_default from './cursor/hover-default'
 import anim_header from './header'
 import anim_linkText from './link-text'
 import anim_sectionFooter from './sections/footer'
-import anim_sectionHero from './sections/hero'
+import anim_sectionHero, { animation_hero_enter } from './sections/hero'
 import anim_sectionIntro from './sections/intro'
 import anim_sectionPortfolio from './sections/portfolio'
 import anim_sectionSlider from './sections/slider'
@@ -18,12 +18,12 @@ const animations = () => {
     media: MEDIA,
     callback: async (c) => {
       const isPreload = sessionStorage.getItem('preload')
-      /* if (isPreload) {
-        anim_sectionHero(c)
+      if (isPreload) {
+        animation_hero_enter()
       } else {
-        await delay(5000)
-        anim_sectionHero(c)
-      } */
+        await delay(4000)
+        animation_hero_enter()
+      }
 
       anim_header(c)
       anim_sectionHero(c)

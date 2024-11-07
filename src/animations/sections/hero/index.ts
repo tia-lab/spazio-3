@@ -1,11 +1,14 @@
-import { ANIM_VAR } from '$/spot.config'
+import { ANIM_VAR, MEDIA } from '$/spot.config'
 import { drawPixels, generatePixelGrid } from '@/animations/pixels'
+import { useGsapMatchMedia } from '@/hooks'
 import { ScrollTrigger, gsap } from '@gsap'
 import { Application } from '@splinetool/runtime'
 
 const name = "[data-section='hero']"
 const pixels = "[data-pixels='hero']"
-
+const splineWrap = '.hero_spline_wrap'
+const names = '.hero_name'
+const title = '.hero_title'
 const defaults: GSAPTweenVars = {
   ease: ANIM_VAR.ease.out
 }
@@ -91,3 +94,44 @@ const anim_spline = (section: HTMLElement) => {
 }
 
 export default anim_sectionHero
+
+/* Animation Enter */
+export const animation_hero_enter = () => {
+  const sections = gsap.utils.toArray(name) as HTMLElement[]
+  if (sections.length === 0) return
+
+  sections.forEach((section) => {
+    useGsapMatchMedia({
+      media: MEDIA,
+      scope: section,
+      callback: (ctx) => {
+        const tl = gsap.timeline({
+          defaults
+        })
+
+        tl.to(['.main-wrapper', splineWrap], { opacity: 1 })
+          .from(names, {
+            opacity: 0,
+            translateZ: -25,
+            scale: 0.5,
+            duration: ANIM_VAR.duration.default / 3,
+            stagger: { each: 0.1, from: 'random' }
+          })
+          .from(
+            title,
+            {
+              translateZ: ctx.conditions.desktop ? -120 : 0,
+              scale: 1,
+              opacity: 0
+            },
+            '<'
+          )
+          .from(
+            splineWrap,
+            { translateZ: -100, duration: 1.5, scale: 0.5 },
+            '>-=0.5'
+          )
+      }
+    })
+  })
+}
