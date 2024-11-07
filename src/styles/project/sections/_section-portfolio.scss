@@ -9,6 +9,12 @@
       transform $duration-base $out-cubic;
   }
 
+  [data-accordion='head'] {
+    .title-h3 {
+      transition: transform $duration-base $out-cubic;
+    }
+  }
+
   @include tablet {
     .project_open {
       opacity: 1 !important;
@@ -27,14 +33,20 @@
       }
     }
 
-    [data-project='head'] {
-      &:hover {
-        .project_date {
-          opacity: 0;
-        }
+    &:not(.is-active) {
+      [data-accordion='head'] {
+        &:hover {
+          .title-h3 {
+            transform: translateX(0.5rem);
+          }
 
-        .project_open {
-          opacity: 1;
+          .project_date {
+            opacity: 0 !important;
+          }
+
+          .project_open {
+            opacity: 1 !important;
+          }
         }
       }
     }
