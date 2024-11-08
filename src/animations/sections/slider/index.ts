@@ -62,7 +62,8 @@ const anim_slider = async (section: HTMLElement) => {
         direction: 'vertical',
         spaceBetween: 0,
         navigation: false,
-        pagination: false
+        pagination: false,
+        simulateTouch: false
       })
 
       // Add custom navigation

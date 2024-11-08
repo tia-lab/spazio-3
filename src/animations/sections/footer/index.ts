@@ -105,7 +105,8 @@ const anim_enter = (section: HTMLElement, ctx: any) => {
         },
         '>'
       )
-      .to(
+    ctx.conditions.desktop &&
+      tlLogo.to(
         linkHeroz,
         {
           scale: 1.05,

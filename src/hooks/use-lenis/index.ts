@@ -1,15 +1,13 @@
 import { ANIM_VAR } from '$/spot.config'
-import { ScrollTrigger, gsap } from '@gsap'
+import { gsap } from '@gsap'
 import Lenis from '@studio-freight/lenis'
 
-// Initialize Lenis once and export the instance
+// Initialize Lenis
 const lenis = new Lenis({
   ...ANIM_VAR.lenis.options
 })
 
-// GSAP sync if desired
-gsap.registerPlugin(ScrollTrigger)
-lenis.on('scroll', ScrollTrigger.update)
+// Only Lenis raf update, no ScrollTrigger sync
 gsap.ticker.add((time) => lenis.raf(time * 1000))
 gsap.ticker.lagSmoothing(0)
 

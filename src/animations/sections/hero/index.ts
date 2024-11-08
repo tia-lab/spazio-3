@@ -109,7 +109,7 @@ export const animation_hero_enter = () => {
           defaults
         })
 
-        tl.to(['.main-wrapper', splineWrap], { opacity: 1 })
+        tl.to(['.main-wrapper'], { opacity: 1 })
           .from(names, {
             opacity: 0,
             translateZ: -25,
@@ -126,9 +126,14 @@ export const animation_hero_enter = () => {
             },
             '<'
           )
+          .to(splineWrap, { opacity: 1 }, '<')
           .from(
             splineWrap,
-            { translateZ: -100, duration: 1.5, scale: 0.5 },
+            {
+              translateZ: ctx.conditions.desktop ? -100 : 0,
+              duration: 1.5,
+              scale: ctx.conditions.desktop ? 0.5 : 1
+            },
             '>-=0.5'
           )
       }

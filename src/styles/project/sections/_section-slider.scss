@@ -11,10 +11,25 @@
 
   .slide_button {
     cursor: pointer;
+    transition: opacity $duration-base $out-cubic;
+
+    .swiper-button-icon svg {
+      transition: transform $duration-base $out-cubic;
+
+      &.is-prev {
+        transform: rotate(180deg) !important;
+      }
+    }
 
     &.disabled {
       opacity: 0;
       pointer-events: none;
+    }
+
+    &:hover {
+      .swiper-button-icon svg {
+        transform: scale(0.85);
+      }
     }
   }
 
