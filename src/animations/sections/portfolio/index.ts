@@ -27,7 +27,7 @@ const anim_sectionPortfolio = (ctx: any) => {
           number.innerHTML = '0' + number.innerHTML
         }
       })
-      anim_pixels(section)
+      //anim_pixels(section)
       anim_accordion(ctx, section)
     }, section)
   })

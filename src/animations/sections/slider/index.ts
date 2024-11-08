@@ -41,7 +41,7 @@ const anim_slider = async (section: HTMLElement) => {
   const toRadians = (degrees: number) => degrees * (Math.PI / 180)
 
   spline
-    .load('https://prod.spline.design/qqDCMoeVS30S5rzI/scene.splinecode')
+    .load('https://prod.spline.design/4fh3u5wQxc6bd-YZ/scene.splinecode')
     .then(() => {
       const obj = spline.findObjectByName('spaziotre') as any
       gsap.set(obj.position, { x: 10, y: 0, z: 0 })
