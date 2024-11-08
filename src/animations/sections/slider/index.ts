@@ -59,11 +59,19 @@ const anim_slider = async (section: HTMLElement) => {
 
       const swiper = new Swiper('.swiper-container', {
         slidesPerView: 1,
-        direction: 'vertical',
         spaceBetween: 0,
         navigation: false,
         pagination: false,
-        simulateTouch: false
+        simulateTouch: false,
+        breakpoints: {
+          992: {
+            // Adjust the breakpoint as needed
+            direction: 'vertical' // Desktop: vertical
+          },
+          0: {
+            direction: 'horizontal' // Mobile: horizontal
+          }
+        }
       })
 
       // Add custom navigation
