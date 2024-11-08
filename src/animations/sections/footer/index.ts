@@ -13,7 +13,7 @@ const anim_sectionFooter = (ctx: any) => {
 
   sections.forEach((section) => {
     gsap.context(() => {
-      anim_pixels(section)
+      //anim_pixels(section)
       anim_enter(section, ctx)
     }, section)
   })
