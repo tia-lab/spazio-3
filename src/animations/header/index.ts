@@ -70,8 +70,8 @@ const anim_header = async (_ctx: any) => {
         ScrollTrigger.observe({
           target: button,
           onClick: () => {
+            lenis.start()
             if (anchor) {
-              lenis?.start()
               lenis?.scrollTo(anchor, { duration: 0.25 })
               if (section.dataset.open === 'true') {
                 console.log('close')
