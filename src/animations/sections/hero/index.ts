@@ -90,7 +90,7 @@ const anim_spline = (section: HTMLElement) => {
   ) as HTMLCanvasElement
   if (!canvas) return
   const spline = new Application(canvas)
-  spline.load('https://prod.spline.design/UqfiCdSpV0iHdj2b/scene.splinecode')
+  spline.load('https://prod.spline.design/1rrimpe4MY6VO3gk/scene.splinecode')
 }
 
 export default anim_sectionHero
