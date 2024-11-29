@@ -188,6 +188,7 @@ const anim_slider = async (section: HTMLElement) => {
 }
 
 const anim_pixels = (section: HTMLElement, ctx: any) => {
+  if (!ctx.conditions.desktop) return
   const pixelContainers = Array.from(
     document.querySelectorAll<HTMLDivElement>(pixels) // Adjust selector if necessary
   )

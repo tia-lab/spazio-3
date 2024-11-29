@@ -5,11 +5,7 @@ import { ScrollTrigger, gsap } from '@gsap'
 const name = "[data-section='intro']"
 const pixels = "[data-pixels='intro']"
 
-const defaults: GSAPTweenVars = {
-  ease: ANIM_VAR.ease.out
-}
-
-const anim_sectionIntro = (_ctx: any) => {
+const anim_sectionIntro = (ctx: any) => {
   const sections = gsap.utils.toArray(name) as HTMLElement[]
   if (sections.length === 0) return
 
@@ -17,12 +13,13 @@ const anim_sectionIntro = (_ctx: any) => {
 
   sections.forEach((section) => {
     gsap.context(() => {
-      anim_pixels(section)
+      anim_pixels(section, ctx)
     }, section)
   })
 }
 
-const anim_pixels = (section: HTMLElement) => {
+const anim_pixels = (section: HTMLElement, ctx: any) => {
+  if (!ctx.conditions.desktop) return
   const pixelContainers = Array.from(
     document.querySelectorAll<HTMLDivElement>(pixels) // Adjust selector if necessary
   )
